@@ -1,0 +1,135 @@
+$tile-width: 150px;
+$tile-height: 110px;
+
+$border-width: 4px;
+$grid-rows: 5;
+$grid-columns: 6;
+
+$move-distance-horizontal: $tile-width - $border-width;
+$move-distance-vertical:  $tile-height - $border-width;
+
+$container-margin: 20px;
+
+@mixin container {
+	width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);
+	height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);
+	position: absolute;
+}
+
+@mixin transform($args...) {
+	-webkit-transform: $args;
+	-moz-transform: $args;
+	transform: $args;
+}
+
+
+
+* { box-sizing: border-box }
+
+body {
+	width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);
+	margin: 0 auto;
+	color: white;
+	background: black;
+}
+
+.header {
+	.level {
+		display: inline-block;
+		width: $tile-width - $border-width;
+		text-align: center;
+	}
+	.game-mode {
+		display: inline-block;
+		margin: 20px 0;
+
+		width: (($grid-columns - 2) * $tile-width) - (($grid-columns - 2) * $border-width) -  $border-width;
+		border-top: $border-width solid red;
+		border-bottom: $border-width solid red;
+		text-align: center;
+
+		font-size: 15pt;
+		line-height: 12pt;
+	}
+}
+
+.game-container {
+	@include container;
+	z-index: 2;
+
+	.row {
+		display:block;
+
+		.tile {
+			display: inline-block;
+			position: relative;
+			/*z-index: 2;*/
+
+			width: $tile-width;
+			height: $tile-height;
+			
+			/*background-color: white;*/
+			border: $border-width solid purple;
+
+			margin-top: -$border-width;
+			margin-left: -$border-width;
+
+			.tile-inner {
+				/*background-color: green;*/
+				width: 80%;
+				margin: 25% auto;
+				text-align: center;
+				font-size: 15pt;
+				color: white;
+			}
+		}
+	}
+}
+/* .tile:before {
+content: '';
+position:absolute;
+top:-3px;
+left:-3px; 
+height:106px;
+width:106px;
+background-color: white;
+border-radius: 25px;
+} */
+
+.player-grid {
+	@include container;
+	/*width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);*/
+	/*height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);*/
+
+	background-color: black; 
+
+	/*position: absolute;*/
+	top: 0;
+	z-index: -1;
+
+	#player {
+		position: absolute;
+		width: $tile-width - (2 * $border-width);
+		height: $tile-height - (2 * $border-width);
+		/*top: $border-width;*/
+		background-color: red;
+
+		-webkit-transition: 100ms ease-in-out;
+		   -moz-transition: 100ms ease-in-out;
+				transition: 100ms ease-in-out;
+
+		-webkit-transition-property: -webkit-transform;
+		   -moz-transition-property: -moz-transform;
+				transition-property: transform;
+
+		@for $x from 1 through $grid-columns {
+			@for $y from 1 through $grid-rows {
+				&.position-#{$y}-#{$x} {
+					$xPos: floor( ($x - 1) * $move-distance-horizontal);
+					$yPos: floor( ($y - 1) * $move-distance-vertical);
+					@include transform(translate($xPos, $yPos));
+				}
+			}
+		}
+	}
+}

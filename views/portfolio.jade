@@ -1,0 +1,64 @@
+extends layout
+
+block styles
+	link(rel='stylesheet', href='/css/portfolio.css')
+
+block scripts
+	script(src='/js/background.js')
+	script(src='/js/portfolio.js')
+
+block content
+	h1.title My Projects
+
+	//- Completed
+	div.section
+		span.header Completed:
+		div.project
+			figure
+				a(href='/Portfolio/Scoreboard/Simple')
+					div.img(data-primary='scoreboard.png' data-secondary='')
+					figcaption Basketball Scoreboard: Simplified
+
+		div.project
+			figure
+				a(href='/Portfolio/Scoreboard/LED')
+					div.img(data-primary='scoreboard-led.png' data-secondary='')
+					figcaption Basketball Scoreboard: LED
+
+		div.project
+			figure
+				a(href='/Portfolio/MIPS')
+					div.img(data-primary='mips.png' data-secondary='')
+					figcaption MIPS
+
+
+	//- In Progress
+	div.section
+		span.header In Progress:
+		div.project
+			figure
+				a(href='/Portfolio/Scoreboard/LEDSimple')
+					div.img(data-primary='led-simple.png' data-secondary='')
+					figcaption Basketball Scoreboard: LED - Separate display and controller
+
+		div.project
+			figure
+				a(href='/Portfolio/GymLocker')
+					div.img(data-primary='gymlocker.png' data-secondary='gymlocker-exercise.png')
+					figcaption GymLocker
+
+	//- Prototypes
+	div.section
+		span.header Prototypes:
+		div.project
+			figure
+				a(href='/Portfolio/Cards')
+					div.img(data-primary='matching-pairs-new.png' data-secondary='matching-pairs-played.png')
+					figcaption Cards: Match Pairs
+		
+		div.project
+			figure
+				a(href='/Portfolio/Casino/VideoPoker')
+					div.img(data-primary='video-poker.png' data-secondary='')
+					figcaption Casino: Video Poker
+		

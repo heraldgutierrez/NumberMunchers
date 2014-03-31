@@ -1,0 +1,101 @@
+extends layout
+
+block styles
+	link(rel='stylesheet', href='/css/resume.css')
+
+block content
+	//- Other Information
+	div#additional.section_container
+		//- Education
+		div.section
+			span.header Education
+			span.job University of Manitoba 
+			span.location 
+				i Bachelor of Science: Computer Science Major with Co-op Option
+			ul
+				li GPA - 3.05
+				li Dean's Honour List - 2011
+				li Attended 2007 - 2013
+
+		//- Technical Skills
+		div.section
+			span.header Technical Skills
+			span.skill Programming Languages
+			ul
+				li Extensive knowledge and work experience with Java
+				li Work experience with VBA (Excel), VBScrtip, and C#
+				li Course knowledge of C/C++ and Assembly language (LC3)
+			span.skill Web Development Languages
+			ul
+				li Work experience with HTML, CSS, Javascript/jQuery, .NET/C#, XML, and Java Servlets
+				li Course knowledge of Perl, PHP, JavaBeans, ASP, JSP, and XSL
+				li Learning NodeJS, Express, and Jade
+			span.skill Databases
+			ul
+				li Extensive knowledge of MySQL
+				li Work experience with Microsoft Access
+				li Learning MondoDB with Mongoose
+			span.skill Software
+			ul
+				li Work experience with Microsoft Visual Studio, Excel, Word, and NetBeans with TortoiseSVN
+				li Course experience with Eclipse with CVS, Sublime Text, and Mac OS Terminal
+
+	div#experiences.section_container
+		//- Technical Work Experiences
+		div.section
+			span.header Work Experience
+
+			//- iQmetrix
+			span.job iQmetrix - Web Developer
+			span.location Winnipeg, MB Canada
+			span.date January 2013 - April 2013 (Co-op Work Term III) [
+				a(href='http://www.iqmetrix.com') www.iqmetrix.com
+				| ]
+			ul
+				li Worked on the intranet website for their clients. Tasks included fixing reported bugs, implementing new features, resolving support requests, and improving and optimizing performance.
+				li Code reviews with peers ensuring code is working without causing other bugs before it was committed to the build.
+				li Attended daily morning scrums and iteration planning every two weeks.
+			span.language Languages used: C#, HTML, CSS, JavaScript/jQuery, and SQL
+
+			//- Agriculture and Agri-Food Canada
+			span.job Agriculture and Agri-Food Canada (AAFC) - Small Systems Analyst
+			span.location Winnipeg, MB Canada
+			span.date May 2012 - August 2012 (Co-op Work Term II)
+			ul
+				li Generated a PDF from an Excel workbook for customers. The process included reading Excel cells to produce an XML. The XML is passed to a VBScript to do a custom mail merge into a Word document, which is saved as a PDF.
+				li Attended requirement meetings with other departments.
+				li Created four different single-page web applications. The most notable was an internal calendar that kept track of employee attendance (vacation, doctor appointments, out of office, etc...)
+			span.language Languages used: VBA for Excel, VBScript, MS Access, HTML, CSS, and JavaScript
+
+			//- Geomax Mobile Corporation
+			span.job Geomax Mobile Corporation - Wireless Application Developer
+			span.location Winnipeg, MB Canada
+			span.date Mobile GPS for transportation companies [
+				a(href='http://www.geomaxmobile.com') www.geomaxmobile.com
+				| ]
+			span.location September 2011 - December 2011 (Co-op Work Term I)
+			ul
+				li Updated their web application that kept track of invoice documents throughout their processing phase.
+				li Attended customer meetings for software reviews and requests for additional features for the web application. The requested features were implemented in the next updates. (For example, customers being emailed if their invoice was rejected during processing).
+				li Preformed software releases after the project had been committed, built, and prcessed by Maven.
+				li Updated the Geomax Mobile website with current information about the company.
+			span.language Languages used: Java, JSP, HTML, CSS, JavaScript/jQuery, and SQL
+
+		//- Other Work Experiences
+		div.section
+			span.header Other Work Experience
+
+			//- Shoppers Drug Mart
+			span.job Shoppers Drug Mart - Merchandiser
+			span.location Winnipeg, MB Canada
+			span.date August 2007 - April 2012
+
+			//- The Children's Place
+			span.job The Children's Place - Stock
+			span.location Winnipeg, MB Canada
+			span.date November 2013 - Present
+
+		//- References
+		div.section
+			span.header References
+			span.location Available upon request.
