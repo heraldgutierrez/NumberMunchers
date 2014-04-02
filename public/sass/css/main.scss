@@ -1,9 +1,11 @@
-$tile-width: 150px;
+$tile-width: 140px;
 $tile-height: 110px;
 
 $border-width: 4px;
-$grid-rows: 5;
-$grid-columns: 6;
+/*$grid-rows: 5;*/
+/*$grid-columns: 6;*/
+$grid-rows: 7;
+$grid-columns: 8;
 
 $move-distance-horizontal: $tile-width - $border-width;
 $move-distance-vertical:  $tile-height - $border-width;
@@ -11,9 +13,22 @@ $move-distance-vertical:  $tile-height - $border-width;
 $container-margin: 20px;
 
 @mixin container {
-	width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);
-	height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);
+	$newWidth: $grid-columns - 1;
+	$newHeight: $grid-rows - 1;
+
+	width: ($newWidth * $tile-width) - ($newWidth * $border-width);
+	height: ($newHeight * $tile-height) - ($newHeight * $border-width);
 	position: absolute;
+
+	margin-top: -$tile-height/2;
+	overflow: hidden;
+}
+
+@mixin emptyTileSize($width, $height) {
+	width: $width;
+	height: $height;
+	vertical-align: top;
+	border: 0 transparent;
 }
 
 @mixin transform($args...) {
@@ -27,23 +42,34 @@ $container-margin: 20px;
 * { box-sizing: border-box }
 
 body {
-	width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);
+	width: (($grid-columns - 1) * $tile-width) - (($grid-columns - 1) * $border-width);
 	margin: 0 auto;
 	color: white;
 	background: black;
 }
 
 .header {
+	height: $tile-height;
+	margin-bottom: 20px;
+	margin-left: $tile-width/2;
+
 	.level {
 		display: inline-block;
 		width: $tile-width - $border-width;
 		text-align: center;
+		margin-top: 30px;
+		vertical-align: top;
+
+		span {
+			font-size: 20pt;
+			display: block;
+		}
 	}
 	.game-mode {
 		display: inline-block;
 		margin: 20px 0;
 
-		width: (($grid-columns - 2) * $tile-width) - (($grid-columns - 2) * $border-width) -  $border-width;
+		width: (($grid-columns - 4) * $tile-width) - (($grid-columns - 3) * $border-width) -  $border-width;
 		border-top: $border-width solid red;
 		border-bottom: $border-width solid red;
 		text-align: center;
@@ -53,9 +79,12 @@ body {
 	}
 }
 
-.game-container {
+/*.game-container {*/
+#grid {
 	@include container;
+
 	z-index: 2;
+	/*background-color: yellow;*/
 
 	.row {
 		display:block;
@@ -73,6 +102,7 @@ body {
 
 			margin-top: -$border-width;
 			margin-left: -$border-width;
+			vertical-align: top;
 
 			.tile-inner {
 				/*background-color: green;*/
@@ -81,6 +111,18 @@ body {
 				text-align: center;
 				font-size: 15pt;
 				color: white;
+			}
+
+			&.emptyRow {
+				@include emptyTileSize($tile-width, $tile-height/2);
+			}
+
+			&.emptyCol {
+				@include emptyTileSize($tile-width/2, $tile-height);
+			}
+
+			&.emptyCorner {
+				@include emptyTileSize($tile-width/2, $tile-height/2);
 			}
 		}
 	}
@@ -96,18 +138,13 @@ background-color: white;
 border-radius: 25px;
 } */
 
-.player-grid {
+#player-grid {
 	@include container;
-	/*width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);*/
-	/*height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);*/
+	/*background-color: blue;*/
 
-	background-color: black; 
-
-	/*position: absolute;*/
-	top: 0;
 	z-index: -1;
 
-	#player {
+	#muncher {
 		position: absolute;
 		width: $tile-width - (2 * $border-width);
 		height: $tile-height - (2 * $border-width);
@@ -124,9 +161,9 @@ border-radius: 25px;
 
 		@for $x from 1 through $grid-columns {
 			@for $y from 1 through $grid-rows {
-				&.position-#{$y}-#{$x} {
-					$xPos: floor( ($x - 1) * $move-distance-horizontal);
-					$yPos: floor( ($y - 1) * $move-distance-vertical);
+				&.position-#{$x}-#{$y} {
+					$xPos: floor( ($x - 1) * $move-distance-horizontal) - ($tile-width/2);
+					$yPos: floor( ($y - 1) * $move-distance-vertical) - ($tile-height/2);
 					@include transform(translate($xPos, $yPos));
 				}
 			}

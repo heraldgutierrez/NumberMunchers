@@ -1,50 +1,81 @@
+/*$grid-rows: 5;*/
+/*$grid-columns: 6;*/
 * {
   box-sizing: border-box; }
 
 body {
-  width: 876px;
+  width: 952px;
   margin: 0 auto;
   color: white;
   background: black; }
 
-.header .level {
-  display: inline-block;
-  width: 146px;
-  text-align: center; }
-.header .game-mode {
-  display: inline-block;
-  margin: 20px 0;
-  width: 580px;
-  border-top: 4px solid red;
-  border-bottom: 4px solid red;
-  text-align: center;
-  font-size: 15pt;
-  line-height: 12pt; }
+.header {
+  height: 110px;
+  margin-bottom: 20px;
+  margin-left: 70px; }
+  .header .level {
+    display: inline-block;
+    width: 136px;
+    text-align: center;
+    margin-top: 30px;
+    vertical-align: top; }
+    .header .level span {
+      font-size: 20pt;
+      display: block; }
+  .header .game-mode {
+    display: inline-block;
+    margin: 20px 0;
+    width: 536px;
+    border-top: 4px solid red;
+    border-bottom: 4px solid red;
+    text-align: center;
+    font-size: 15pt;
+    line-height: 12pt; }
 
-.game-container {
-  width: 876px;
-  height: 530px;
+/*.game-container {*/
+#grid {
+  width: 952px;
+  height: 636px;
   position: absolute;
-  z-index: 2; }
-  .game-container .row {
+  margin-top: -55px;
+  overflow: hidden;
+  z-index: 2;
+  /*background-color: yellow;*/ }
+  #grid .row {
     display: block; }
-    .game-container .row .tile {
+    #grid .row .tile {
       display: inline-block;
       position: relative;
       /*z-index: 2;*/
-      width: 150px;
+      width: 140px;
       height: 110px;
       /*background-color: white;*/
       border: 4px solid purple;
       margin-top: -4px;
-      margin-left: -4px; }
-      .game-container .row .tile .tile-inner {
+      margin-left: -4px;
+      vertical-align: top; }
+      #grid .row .tile .tile-inner {
         /*background-color: green;*/
         width: 80%;
         margin: 25% auto;
         text-align: center;
         font-size: 15pt;
         color: white; }
+      #grid .row .tile.emptyRow {
+        width: 140px;
+        height: 55px;
+        vertical-align: top;
+        border: 0 transparent; }
+      #grid .row .tile.emptyCol {
+        width: 70px;
+        height: 110px;
+        vertical-align: top;
+        border: 0 transparent; }
+      #grid .row .tile.emptyCorner {
+        width: 70px;
+        height: 55px;
+        vertical-align: top;
+        border: 0 transparent; }
 
 /* .tile:before {
 content: '';
@@ -56,19 +87,17 @@ width:106px;
 background-color: white;
 border-radius: 25px;
 } */
-.player-grid {
-  width: 876px;
-  height: 530px;
+#player-grid {
+  width: 952px;
+  height: 636px;
   position: absolute;
-  /*width: ($grid-columns * $tile-width) - ($grid-columns * $border-width);*/
-  /*height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);*/
-  background-color: black;
-  /*position: absolute;*/
-  top: 0;
+  margin-top: -55px;
+  overflow: hidden;
+  /*background-color: blue;*/
   z-index: -1; }
-  .player-grid #player {
+  #player-grid #muncher {
     position: absolute;
-    width: 142px;
+    width: 132px;
     height: 102px;
     /*top: $border-width;*/
     background-color: red;
@@ -78,123 +107,227 @@ border-radius: 25px;
     -webkit-transition-property: -webkit-transform;
     -moz-transition-property: -moz-transform;
     transition-property: transform; }
-    .player-grid #player.position-1-1 {
-      -webkit-transform: translate(0px, 0px);
-      -moz-transform: translate(0px, 0px);
-      transform: translate(0px, 0px); }
-    .player-grid #player.position-2-1 {
-      -webkit-transform: translate(0px, 106px);
-      -moz-transform: translate(0px, 106px);
-      transform: translate(0px, 106px); }
-    .player-grid #player.position-3-1 {
-      -webkit-transform: translate(0px, 212px);
-      -moz-transform: translate(0px, 212px);
-      transform: translate(0px, 212px); }
-    .player-grid #player.position-4-1 {
-      -webkit-transform: translate(0px, 318px);
-      -moz-transform: translate(0px, 318px);
-      transform: translate(0px, 318px); }
-    .player-grid #player.position-5-1 {
-      -webkit-transform: translate(0px, 424px);
-      -moz-transform: translate(0px, 424px);
-      transform: translate(0px, 424px); }
-    .player-grid #player.position-1-2 {
-      -webkit-transform: translate(146px, 0px);
-      -moz-transform: translate(146px, 0px);
-      transform: translate(146px, 0px); }
-    .player-grid #player.position-2-2 {
-      -webkit-transform: translate(146px, 106px);
-      -moz-transform: translate(146px, 106px);
-      transform: translate(146px, 106px); }
-    .player-grid #player.position-3-2 {
-      -webkit-transform: translate(146px, 212px);
-      -moz-transform: translate(146px, 212px);
-      transform: translate(146px, 212px); }
-    .player-grid #player.position-4-2 {
-      -webkit-transform: translate(146px, 318px);
-      -moz-transform: translate(146px, 318px);
-      transform: translate(146px, 318px); }
-    .player-grid #player.position-5-2 {
-      -webkit-transform: translate(146px, 424px);
-      -moz-transform: translate(146px, 424px);
-      transform: translate(146px, 424px); }
-    .player-grid #player.position-1-3 {
-      -webkit-transform: translate(292px, 0px);
-      -moz-transform: translate(292px, 0px);
-      transform: translate(292px, 0px); }
-    .player-grid #player.position-2-3 {
-      -webkit-transform: translate(292px, 106px);
-      -moz-transform: translate(292px, 106px);
-      transform: translate(292px, 106px); }
-    .player-grid #player.position-3-3 {
-      -webkit-transform: translate(292px, 212px);
-      -moz-transform: translate(292px, 212px);
-      transform: translate(292px, 212px); }
-    .player-grid #player.position-4-3 {
-      -webkit-transform: translate(292px, 318px);
-      -moz-transform: translate(292px, 318px);
-      transform: translate(292px, 318px); }
-    .player-grid #player.position-5-3 {
-      -webkit-transform: translate(292px, 424px);
-      -moz-transform: translate(292px, 424px);
-      transform: translate(292px, 424px); }
-    .player-grid #player.position-1-4 {
-      -webkit-transform: translate(438px, 0px);
-      -moz-transform: translate(438px, 0px);
-      transform: translate(438px, 0px); }
-    .player-grid #player.position-2-4 {
-      -webkit-transform: translate(438px, 106px);
-      -moz-transform: translate(438px, 106px);
-      transform: translate(438px, 106px); }
-    .player-grid #player.position-3-4 {
-      -webkit-transform: translate(438px, 212px);
-      -moz-transform: translate(438px, 212px);
-      transform: translate(438px, 212px); }
-    .player-grid #player.position-4-4 {
-      -webkit-transform: translate(438px, 318px);
-      -moz-transform: translate(438px, 318px);
-      transform: translate(438px, 318px); }
-    .player-grid #player.position-5-4 {
-      -webkit-transform: translate(438px, 424px);
-      -moz-transform: translate(438px, 424px);
-      transform: translate(438px, 424px); }
-    .player-grid #player.position-1-5 {
-      -webkit-transform: translate(584px, 0px);
-      -moz-transform: translate(584px, 0px);
-      transform: translate(584px, 0px); }
-    .player-grid #player.position-2-5 {
-      -webkit-transform: translate(584px, 106px);
-      -moz-transform: translate(584px, 106px);
-      transform: translate(584px, 106px); }
-    .player-grid #player.position-3-5 {
-      -webkit-transform: translate(584px, 212px);
-      -moz-transform: translate(584px, 212px);
-      transform: translate(584px, 212px); }
-    .player-grid #player.position-4-5 {
-      -webkit-transform: translate(584px, 318px);
-      -moz-transform: translate(584px, 318px);
-      transform: translate(584px, 318px); }
-    .player-grid #player.position-5-5 {
-      -webkit-transform: translate(584px, 424px);
-      -moz-transform: translate(584px, 424px);
-      transform: translate(584px, 424px); }
-    .player-grid #player.position-1-6 {
-      -webkit-transform: translate(730px, 0px);
-      -moz-transform: translate(730px, 0px);
-      transform: translate(730px, 0px); }
-    .player-grid #player.position-2-6 {
-      -webkit-transform: translate(730px, 106px);
-      -moz-transform: translate(730px, 106px);
-      transform: translate(730px, 106px); }
-    .player-grid #player.position-3-6 {
-      -webkit-transform: translate(730px, 212px);
-      -moz-transform: translate(730px, 212px);
-      transform: translate(730px, 212px); }
-    .player-grid #player.position-4-6 {
-      -webkit-transform: translate(730px, 318px);
-      -moz-transform: translate(730px, 318px);
-      transform: translate(730px, 318px); }
-    .player-grid #player.position-5-6 {
-      -webkit-transform: translate(730px, 424px);
-      -moz-transform: translate(730px, 424px);
-      transform: translate(730px, 424px); }
+    #player-grid #muncher.position-1-1 {
+      -webkit-transform: translate(-70px, -55px);
+      -moz-transform: translate(-70px, -55px);
+      transform: translate(-70px, -55px); }
+    #player-grid #muncher.position-1-2 {
+      -webkit-transform: translate(-70px, 51px);
+      -moz-transform: translate(-70px, 51px);
+      transform: translate(-70px, 51px); }
+    #player-grid #muncher.position-1-3 {
+      -webkit-transform: translate(-70px, 157px);
+      -moz-transform: translate(-70px, 157px);
+      transform: translate(-70px, 157px); }
+    #player-grid #muncher.position-1-4 {
+      -webkit-transform: translate(-70px, 263px);
+      -moz-transform: translate(-70px, 263px);
+      transform: translate(-70px, 263px); }
+    #player-grid #muncher.position-1-5 {
+      -webkit-transform: translate(-70px, 369px);
+      -moz-transform: translate(-70px, 369px);
+      transform: translate(-70px, 369px); }
+    #player-grid #muncher.position-1-6 {
+      -webkit-transform: translate(-70px, 475px);
+      -moz-transform: translate(-70px, 475px);
+      transform: translate(-70px, 475px); }
+    #player-grid #muncher.position-1-7 {
+      -webkit-transform: translate(-70px, 581px);
+      -moz-transform: translate(-70px, 581px);
+      transform: translate(-70px, 581px); }
+    #player-grid #muncher.position-2-1 {
+      -webkit-transform: translate(66px, -55px);
+      -moz-transform: translate(66px, -55px);
+      transform: translate(66px, -55px); }
+    #player-grid #muncher.position-2-2 {
+      -webkit-transform: translate(66px, 51px);
+      -moz-transform: translate(66px, 51px);
+      transform: translate(66px, 51px); }
+    #player-grid #muncher.position-2-3 {
+      -webkit-transform: translate(66px, 157px);
+      -moz-transform: translate(66px, 157px);
+      transform: translate(66px, 157px); }
+    #player-grid #muncher.position-2-4 {
+      -webkit-transform: translate(66px, 263px);
+      -moz-transform: translate(66px, 263px);
+      transform: translate(66px, 263px); }
+    #player-grid #muncher.position-2-5 {
+      -webkit-transform: translate(66px, 369px);
+      -moz-transform: translate(66px, 369px);
+      transform: translate(66px, 369px); }
+    #player-grid #muncher.position-2-6 {
+      -webkit-transform: translate(66px, 475px);
+      -moz-transform: translate(66px, 475px);
+      transform: translate(66px, 475px); }
+    #player-grid #muncher.position-2-7 {
+      -webkit-transform: translate(66px, 581px);
+      -moz-transform: translate(66px, 581px);
+      transform: translate(66px, 581px); }
+    #player-grid #muncher.position-3-1 {
+      -webkit-transform: translate(202px, -55px);
+      -moz-transform: translate(202px, -55px);
+      transform: translate(202px, -55px); }
+    #player-grid #muncher.position-3-2 {
+      -webkit-transform: translate(202px, 51px);
+      -moz-transform: translate(202px, 51px);
+      transform: translate(202px, 51px); }
+    #player-grid #muncher.position-3-3 {
+      -webkit-transform: translate(202px, 157px);
+      -moz-transform: translate(202px, 157px);
+      transform: translate(202px, 157px); }
+    #player-grid #muncher.position-3-4 {
+      -webkit-transform: translate(202px, 263px);
+      -moz-transform: translate(202px, 263px);
+      transform: translate(202px, 263px); }
+    #player-grid #muncher.position-3-5 {
+      -webkit-transform: translate(202px, 369px);
+      -moz-transform: translate(202px, 369px);
+      transform: translate(202px, 369px); }
+    #player-grid #muncher.position-3-6 {
+      -webkit-transform: translate(202px, 475px);
+      -moz-transform: translate(202px, 475px);
+      transform: translate(202px, 475px); }
+    #player-grid #muncher.position-3-7 {
+      -webkit-transform: translate(202px, 581px);
+      -moz-transform: translate(202px, 581px);
+      transform: translate(202px, 581px); }
+    #player-grid #muncher.position-4-1 {
+      -webkit-transform: translate(338px, -55px);
+      -moz-transform: translate(338px, -55px);
+      transform: translate(338px, -55px); }
+    #player-grid #muncher.position-4-2 {
+      -webkit-transform: translate(338px, 51px);
+      -moz-transform: translate(338px, 51px);
+      transform: translate(338px, 51px); }
+    #player-grid #muncher.position-4-3 {
+      -webkit-transform: translate(338px, 157px);
+      -moz-transform: translate(338px, 157px);
+      transform: translate(338px, 157px); }
+    #player-grid #muncher.position-4-4 {
+      -webkit-transform: translate(338px, 263px);
+      -moz-transform: translate(338px, 263px);
+      transform: translate(338px, 263px); }
+    #player-grid #muncher.position-4-5 {
+      -webkit-transform: translate(338px, 369px);
+      -moz-transform: translate(338px, 369px);
+      transform: translate(338px, 369px); }
+    #player-grid #muncher.position-4-6 {
+      -webkit-transform: translate(338px, 475px);
+      -moz-transform: translate(338px, 475px);
+      transform: translate(338px, 475px); }
+    #player-grid #muncher.position-4-7 {
+      -webkit-transform: translate(338px, 581px);
+      -moz-transform: translate(338px, 581px);
+      transform: translate(338px, 581px); }
+    #player-grid #muncher.position-5-1 {
+      -webkit-transform: translate(474px, -55px);
+      -moz-transform: translate(474px, -55px);
+      transform: translate(474px, -55px); }
+    #player-grid #muncher.position-5-2 {
+      -webkit-transform: translate(474px, 51px);
+      -moz-transform: translate(474px, 51px);
+      transform: translate(474px, 51px); }
+    #player-grid #muncher.position-5-3 {
+      -webkit-transform: translate(474px, 157px);
+      -moz-transform: translate(474px, 157px);
+      transform: translate(474px, 157px); }
+    #player-grid #muncher.position-5-4 {
+      -webkit-transform: translate(474px, 263px);
+      -moz-transform: translate(474px, 263px);
+      transform: translate(474px, 263px); }
+    #player-grid #muncher.position-5-5 {
+      -webkit-transform: translate(474px, 369px);
+      -moz-transform: translate(474px, 369px);
+      transform: translate(474px, 369px); }
+    #player-grid #muncher.position-5-6 {
+      -webkit-transform: translate(474px, 475px);
+      -moz-transform: translate(474px, 475px);
+      transform: translate(474px, 475px); }
+    #player-grid #muncher.position-5-7 {
+      -webkit-transform: translate(474px, 581px);
+      -moz-transform: translate(474px, 581px);
+      transform: translate(474px, 581px); }
+    #player-grid #muncher.position-6-1 {
+      -webkit-transform: translate(610px, -55px);
+      -moz-transform: translate(610px, -55px);
+      transform: translate(610px, -55px); }
+    #player-grid #muncher.position-6-2 {
+      -webkit-transform: translate(610px, 51px);
+      -moz-transform: translate(610px, 51px);
+      transform: translate(610px, 51px); }
+    #player-grid #muncher.position-6-3 {
+      -webkit-transform: translate(610px, 157px);
+      -moz-transform: translate(610px, 157px);
+      transform: translate(610px, 157px); }
+    #player-grid #muncher.position-6-4 {
+      -webkit-transform: translate(610px, 263px);
+      -moz-transform: translate(610px, 263px);
+      transform: translate(610px, 263px); }
+    #player-grid #muncher.position-6-5 {
+      -webkit-transform: translate(610px, 369px);
+      -moz-transform: translate(610px, 369px);
+      transform: translate(610px, 369px); }
+    #player-grid #muncher.position-6-6 {
+      -webkit-transform: translate(610px, 475px);
+      -moz-transform: translate(610px, 475px);
+      transform: translate(610px, 475px); }
+    #player-grid #muncher.position-6-7 {
+      -webkit-transform: translate(610px, 581px);
+      -moz-transform: translate(610px, 581px);
+      transform: translate(610px, 581px); }
+    #player-grid #muncher.position-7-1 {
+      -webkit-transform: translate(746px, -55px);
+      -moz-transform: translate(746px, -55px);
+      transform: translate(746px, -55px); }
+    #player-grid #muncher.position-7-2 {
+      -webkit-transform: translate(746px, 51px);
+      -moz-transform: translate(746px, 51px);
+      transform: translate(746px, 51px); }
+    #player-grid #muncher.position-7-3 {
+      -webkit-transform: translate(746px, 157px);
+      -moz-transform: translate(746px, 157px);
+      transform: translate(746px, 157px); }
+    #player-grid #muncher.position-7-4 {
+      -webkit-transform: translate(746px, 263px);
+      -moz-transform: translate(746px, 263px);
+      transform: translate(746px, 263px); }
+    #player-grid #muncher.position-7-5 {
+      -webkit-transform: translate(746px, 369px);
+      -moz-transform: translate(746px, 369px);
+      transform: translate(746px, 369px); }
+    #player-grid #muncher.position-7-6 {
+      -webkit-transform: translate(746px, 475px);
+      -moz-transform: translate(746px, 475px);
+      transform: translate(746px, 475px); }
+    #player-grid #muncher.position-7-7 {
+      -webkit-transform: translate(746px, 581px);
+      -moz-transform: translate(746px, 581px);
+      transform: translate(746px, 581px); }
+    #player-grid #muncher.position-8-1 {
+      -webkit-transform: translate(882px, -55px);
+      -moz-transform: translate(882px, -55px);
+      transform: translate(882px, -55px); }
+    #player-grid #muncher.position-8-2 {
+      -webkit-transform: translate(882px, 51px);
+      -moz-transform: translate(882px, 51px);
+      transform: translate(882px, 51px); }
+    #player-grid #muncher.position-8-3 {
+      -webkit-transform: translate(882px, 157px);
+      -moz-transform: translate(882px, 157px);
+      transform: translate(882px, 157px); }
+    #player-grid #muncher.position-8-4 {
+      -webkit-transform: translate(882px, 263px);
+      -moz-transform: translate(882px, 263px);
+      transform: translate(882px, 263px); }
+    #player-grid #muncher.position-8-5 {
+      -webkit-transform: translate(882px, 369px);
+      -moz-transform: translate(882px, 369px);
+      transform: translate(882px, 369px); }
+    #player-grid #muncher.position-8-6 {
+      -webkit-transform: translate(882px, 475px);
+      -moz-transform: translate(882px, 475px);
+      transform: translate(882px, 475px); }
+    #player-grid #muncher.position-8-7 {
+      -webkit-transform: translate(882px, 581px);
+      -moz-transform: translate(882px, 581px);
+      transform: translate(882px, 581px); }

@@ -15,29 +15,50 @@ html
 		script(src='/js/jquery-2.0.3.min.js')
 
 	body
-		- var grid_rows = 5;
-		- var grid_columns = 6;
+		- var grid_rows = 7;
+		- var grid_columns = 8;
 
 		div.header
 			div.level
-				h2 Level: 1
+				span Level : 
+				span#level 1
+
 			div.game-mode
-				h1 Multiples of 2
+				h1#mode Multiples of 2
 		div.game-container
-			div.grid(data-rows=grid_rows data-columns=grid_columns)
+			div#grid(data-rows=grid_rows data-columns=grid_columns)
 				- for(var i = 0; i < grid_rows; i++) {
 					div.row
 						- for(var j = 0; j < grid_columns; j++) {
-							div.tile
-								div.tile-inner
-									span 3 + 2
+							- if((i == 0 && j == 0) || (i == 0 && j == grid_columns - 1) || (i == grid_rows - 1 && j == 0) || (i == grid_rows - 1 && j == grid_columns - 1)) {
+								div.tile.emptyCorner
+									div.tile-inner
+										span
+							- } else if(i == 0 || i == grid_rows - 1) {
+								div.tile.emptyRow
+									div.tile-inner
+											span
+							- } else if((i != 0 && j == 0) || (i != grid_rows - 1 && j == grid_columns - 1))  {
+								div.tile.emptyCol
+									div.tile-inner
+										span
+							- } else {
+								div.tile
+									div.tile-inner
+										span 
+							- }
 						- }
 				- }
 
-			div.player-grid
-				div#player
+			div#player-grid
+				div#muncher
+				div#enemy1
+				div#enemy2
+				div#enemy3
 		
-		script(src='/js/player.js')
+		script(src='/js/helper.js')
+		script(src='/js/multiple.js')
+		script(src='/js/character.js')
 		script(src='/js/gameboard.js')
 		script(src='/js/controller.js')
 		script.
