@@ -14,7 +14,7 @@ function Character(isMuncher, id) {
 	this.y = Math.floor(Math.random() * (this.y_max - this.y_min) + this.y_min);
 
 	this.element = $(id);	// which html element does this character belong to
-	this.lives = 3			// number of lives before a game over
+	this.lives = 4;			// number of lives before a game over
 	this.display();			// display the character
 
 	this.moving = false;
