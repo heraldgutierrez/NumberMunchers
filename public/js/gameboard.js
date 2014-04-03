@@ -12,7 +12,7 @@ function GameBoard() {
 	}	
 
 	// game mode: Multiplication, Factors, Prime Numbers, Equation
-	this.gameMode = whichGameType(_GAMETYPES['mult']);
+	this.gameMode = whichGameType(_GAMETYPES['factor']);
 	// this.whichGameType(_GAMETYPES['mult']);
 
 	// generate the board with values
@@ -88,7 +88,7 @@ function whichGameType(type) {
 			mode = new Multiple();
 			break;
 		case 1:
-			mode = new Multiple();
+			mode = new Factor();
 			break;
 		case 2:
 			mode = new Multiple();

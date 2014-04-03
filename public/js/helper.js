@@ -18,8 +18,10 @@ var _DIRECTION = {
 };
 
 var _GAMETYPES = {
-	'mult': 	0,
-	'factors': 	1,
+	'multiple': 0,
+	'factor': 	1,
 	'prime': 	2,
 	'equal': 	3
 }
+
+var _MIN_SOLUTIONS = 12;
