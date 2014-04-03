@@ -16,41 +16,51 @@ function Character(isMuncher, id) {
 	this.element = $(id);	// which html element does this character belong to
 	this.lives = 3			// number of lives before a game over
 	this.display();			// display the character
+
+	this.moving = false;
 }
 
 // move the character in the direction given
 Character.prototype.move = function(direction) {
-	// remove the current class of a tile
-	var pos_class = 'position-' + this.x + '-' + this.y;
-	$(this.element).removeClass(pos_class);
+	if(!this.moving) {
+		// remove the current class of a tile
+		var pos_class = 'position-' + this.x + '-' + this.y;
+		$(this.element).removeClass(pos_class);
 
-	// the character can only move within its bound area
-	switch(direction) {
-		case _DIRECTION.UP:
-			if(this.y > this.y_min)
-				this.y--;
-			break;
-		case _DIRECTION.RIGHT:
-			if(this.x < this.x_max)	
-				this.x++;
-			break;
-		case _DIRECTION.DOWN:
-			if(this.y < this.y_max)
-				this.y++;
-			break;
-		case _DIRECTION.LEFT:
-			if(this.x > this.x_min)
-				this.x--;
-			break;
+		// the character can only move within its bound area
+		switch(direction) {
+			case _DIRECTION.UP:
+				if(this.y > this.y_min)
+					this.y--;
+				break;
+			case _DIRECTION.RIGHT:
+				if(this.x < this.x_max)	
+					this.x++;
+				break;
+			case _DIRECTION.DOWN:
+				if(this.y < this.y_max)
+					this.y++;
+				break;
+			case _DIRECTION.LEFT:
+				if(this.x > this.x_min)
+					this.x--;
+				break;
+		}
+
+		this.display();
 	}
-
-	this.display();
 }
 
 // add the class of a tile to the character, this will animate the movement
 Character.prototype.display = function() {
+	this.moving = true;
+	var self = this;
 	var pos_class = 'position-' + this.x + '-' + this.y;
 	$(this.element).addClass(pos_class);
+	var timeout = window.setTimeout(function() {
+		self.moving = false;
+		window.clearTimeout(timeout);
+	}, 175);
 }
 
 // get current position of the character

@@ -101,9 +101,9 @@ border-radius: 25px;
     height: 102px;
     /*top: $border-width;*/
     background-color: red;
-    -webkit-transition: 100ms ease-in-out;
-    -moz-transition: 100ms ease-in-out;
-    transition: 100ms ease-in-out;
+    -webkit-transition: 200ms ease-in-out;
+    -moz-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
     -webkit-transition-property: -webkit-transform;
     -moz-transition-property: -moz-transform;
     transition-property: transform; }
