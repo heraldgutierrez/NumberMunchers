@@ -9,12 +9,12 @@ $move-distance-horizontal: $tile-width - $border-width;
 $move-distance-vertical:  $tile-height - $border-width;
 
 $container-margin: 20px;
+$container-width: (($grid-columns - 1) * $tile-width) - (($grid-columns - 1) * $border-width);
 
 @mixin container {
-	$newWidth: $grid-columns - 1;
 	$newHeight: $grid-rows - 1;
 
-	width: ($newWidth * $tile-width) - ($newWidth * $border-width);
+	width: $container-width;
 	height: ($newHeight * $tile-height) - ($newHeight * $border-width);
 	position: absolute;
 
@@ -30,19 +30,147 @@ $container-margin: 20px;
 
 @mixin transform($args...) {
 	-webkit-transform: $args;
-	-moz-transform: $args;
-	transform: $args;
+	   -moz-transform: $args;
+			transform: $args;
 }
 
+@mixin transitionProperty {
+	-webkit-transition: 200ms ease-in-out;
+	   -moz-transition: 200ms ease-in-out;
+			transition: 200ms ease-in-out;
+
+	-webkit-transition-property: -webkit-transform;
+	   -moz-transition-property: -moz-transform;
+			transition-property: transform;
+}
+
+
+@keyframes loadingEven {
+	0% { left: -$container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: $container-width; }
+}
+
+@-moz-keyframes loadingEven{
+	0% { left: -$container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: $container-width; }
+}
+
+@-webkit-keyframes loadingEven {
+	0% { left: -$container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: $container-width; }
+}
+
+@-o-keyframes loadingEven {
+	0% { left: -$container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: $container-width; }
+}
+
+@-ms-keyframes loadingEven {
+	0% { left: -$container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: $container-width; }
+}
+
+
+
+
+
+@keyframes loadingOdd {
+	0% { left: $container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: -$container-width; }
+}
+
+@-moz-keyframes loadingOdd{
+	0% { left: $container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: -$container-width; }
+}
+
+@-webkit-keyframes loadingOdd {
+	0% { left: $container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: -$container-width; }
+}
+
+@-o-keyframes loadingOdd {
+	0% { left: $container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: -$container-width; }
+}
+
+@-ms-keyframes loadingOdd {
+	0% { left: $container-width; }
+	25%, 75% { left: 0px; }
+	100% { left: -$container-width; }
+}
 
 
 * { box-sizing: border-box }
 
 body {
-	width: (($grid-columns - 1) * $tile-width) - (($grid-columns - 1) * $border-width);
+	width: $container-width;
 	margin: 0 auto;
 	color: white;
 	background: black;
+}
+
+.main-menu {
+	@include transitionProperty;
+
+	width: $container-width;
+	height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);
+	position: absolute;
+	z-index: 5;
+	overflow: hidden;
+
+	$loading-height: (((($grid-rows - 0.5) * $tile-height) + (($grid-rows - 3) * $border-width))  / ($grid-rows * 2)) + $border-width;
+
+	div {
+		width: 100%;
+		height: $loading-height;
+		background-color: green;
+		position: absolute;
+
+		@for $i from 2 through (($grid-rows * 2) - 1) {
+			&:nth-child(#{$i}) { 
+				$marginTop: (($i - 1) * $loading-height);
+				@if $i > ($grid-rows) {
+					margin-top: $marginTop - 1px;
+				} @else {
+					margin-top: $marginTop;
+				}
+			}
+		}
+	}
+
+	$load-time: 3s;
+
+	.even {
+		left: -$container-width;
+		&.load {
+			-webkit-animation: loadingEven linear $load-time;
+			   -moz-animation: loadingEven linear $load-time;
+				-ms-animation: loadingEven linear $load-time;
+				 -o-animation: loadingEven linear $load-time;
+					animation: loadingEven linear $load-time;
+		}
+	}
+
+	.odd {
+		left: $container-width;
+		&.load {
+			-webkit-animation: loadingOdd linear $load-time;
+			   -moz-animation: loadingOdd linear $load-time;
+				-ms-animation: loadingOdd linear $load-time;
+				 -o-animation: loadingOdd linear $load-time;
+					animation: loadingOdd linear $load-time;
+		}
+	}
 }
 
 .header {
@@ -143,14 +271,16 @@ border-radius: 25px;
 		width: $tile-width - (2 * $border-width);
 		height: $tile-height - (2 * $border-width);
 		background-color: red;
-
+/*
 		-webkit-transition: 200ms ease-in-out;
 		   -moz-transition: 200ms ease-in-out;
 				transition: 200ms ease-in-out;
 
 		-webkit-transition-property: -webkit-transform;
 		   -moz-transition-property: -moz-transform;
-				transition-property: transform;
+				transition-property: transform;*/
+
+		@include transitionProperty;
 
 		@for $x from 1 through $grid-columns {
 			@for $y from 1 through $grid-rows {

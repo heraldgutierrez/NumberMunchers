@@ -1,5 +1,6 @@
 function Html() {
 	this.scoreContainer = document.querySelector('#score');
+	this.loadingContainer = document.querySelector('.main-menu');
 };
 
 // show score
@@ -37,4 +38,15 @@ Html.prototype.removeClass = function(element, myClass) {
 // add a specific class to an element
 Html.prototype.addClass = function(element, myClass) {
 	document.querySelector(element).classList.add(myClass);
+};
+
+Html.prototype.displayLoad = function(show) {
+	var rows = this.loadingContainer.children;
+	for(var i = 0; i < rows.length; i++) {
+		if(show)
+			rows[i].classList.add('load');
+		else
+			rows[i].classList.remove('load');
+	}
+
 };

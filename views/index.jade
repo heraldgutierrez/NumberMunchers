@@ -18,6 +18,15 @@ html
 		- var grid_rows = 7;
 		- var grid_columns = 8;
 
+		div.main-menu
+			- for(var i = 0; i < ((grid_rows * 2) - 1); i++) {
+				- if(i % 2 == 0) {
+					div.even
+				- } else {
+					div.odd
+				- }
+			- }
+
 		div.header
 			div.level
 				span Level : 
