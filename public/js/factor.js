@@ -1,7 +1,7 @@
 function Factor() {
 	this.solutions = 0;		// number of solutions left for the current objective
 	this.factor = 2;		// current objective
-}
+};
 
 // change the header:
 // current level
@@ -9,7 +9,7 @@ function Factor() {
 Factor.prototype.displayHeading = function(level) {
 	$('#level').html(level);
 	$('#mode').html('Factors of ' + this.factor);
-}
+};
 
 // generate and populate the board with values that correspond with the current level
 Factor.prototype.generateBoard = function(board, level) {
@@ -19,7 +19,6 @@ Factor.prototype.generateBoard = function(board, level) {
 	var number;							// value used in the board
 
 	this.factor = level + 2;			// increase factor (current objective)
-	// this.factor++;
 
 	for (var i = 0; i < rows; i++) {
 		for(var j = 0; j < columns; j++) {
@@ -45,10 +44,8 @@ Factor.prototype.generateBoard = function(board, level) {
 	if(this.solutions < _MIN_SOLUTIONS)
 		tempBoard = this.addMoreSolutions(tempBoard, this.factor);
 
-	console.log(this.solutions);
-
 	return tempBoard;
-}
+};
 
 // we have less than 12 solutions, therefore we are going to add more
 Factor.prototype.addMoreSolutions = function(board, factor) {
@@ -79,7 +76,7 @@ Factor.prototype.addMoreSolutions = function(board, factor) {
 	}
 
 	return tempBoard;
-}
+};
 
 Factor.prototype.getAllFactors = function(number) {
 	var factors = new Array();
@@ -90,19 +87,19 @@ Factor.prototype.getAllFactors = function(number) {
 	}
 
 	return factors;
-}
+};
 
 // a solution has been found, reduce solution count
 Factor.prototype.reduceSolutionsLeft = function() {
 	this.solutions--;
-}
+};
 
 // how many solutions are left to be found
 Factor.prototype.solutionsLeft = function() {
 	return this.solutions;
-}
+};
 
 // is the current value a valid solution for the objective
 Factor.prototype.isSolution = function(value) {
 	return (this.factor % value) == 0;
-}
+};

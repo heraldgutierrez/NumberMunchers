@@ -13,20 +13,17 @@ function Character(isMuncher, id) {
 	this.x = Math.floor(Math.random() * (this.x_max - this.x_min) + this.x_min);
 	this.y = Math.floor(Math.random() * (this.y_max - this.y_min) + this.y_min);
 
-	this.element = $(id);	// which html element does this character belong to
-	this.lives = 4;			// number of lives before a game over
-	this.display();			// display the character
+	// this.element = $(id);	// which html element does this character belong to
+	this.element = id;
+	this.lives = 4;				// number of lives before a game over
+	this.moveCharacter();		// display the character
 
 	this.moving = false;
-}
+};
 
 // move the character in the direction given
 Character.prototype.move = function(direction) {
 	if(!this.moving) {
-		// remove the current class of a tile
-		var pos_class = 'position-' + this.x + '-' + this.y;
-		$(this.element).removeClass(pos_class);
-
 		// the character can only move within its bound area
 		switch(direction) {
 			case _DIRECTION.UP:
@@ -47,23 +44,37 @@ Character.prototype.move = function(direction) {
 				break;
 		}
 
-		this.display();
+		this.moveCharacter();
 	}
-}
+};
 
 // add the class of a tile to the character, this will animate the movement
-Character.prototype.display = function() {
+Character.prototype.moveCharacter = function() {
 	this.moving = true;
 	var self = this;
-	var pos_class = 'position-' + this.x + '-' + this.y;
-	$(this.element).addClass(pos_class);
+
 	var timeout = window.setTimeout(function() {
 		self.moving = false;
 		window.clearTimeout(timeout);
 	}, 175);
-}
+};
 
-// get current position of the character
+// return current position of the character
 Character.prototype.getPosition = function() {
 	return { x: this.x, y: this.y };
-}
+};
+
+// return the characters element html id
+Character.prototype.getElementID = function() {
+	return this.element;
+};
+
+// character died, lose a life
+Character.prototype.died = function() {
+	this.lives--;
+};
+
+// return how many lives are left
+Character.prototype.getLivesLeft = function() {
+	return this.lives;
+};

@@ -2,8 +2,6 @@ $tile-width: 140px;
 $tile-height: 110px;
 
 $border-width: 4px;
-/*$grid-rows: 5;*/
-/*$grid-columns: 6;*/
 $grid-rows: 7;
 $grid-columns: 8;
 
@@ -20,7 +18,6 @@ $container-margin: 20px;
 	height: ($newHeight * $tile-height) - ($newHeight * $border-width);
 	position: absolute;
 
-	margin-top: -$tile-height/2;
 	overflow: hidden;
 }
 
@@ -79,12 +76,15 @@ body {
 	}
 }
 
-/*.game-container {*/
+
+.game-container {
+	@include container;
+	margin-top: -$tile-height/2;
+}
+
 #grid {
 	@include container;
-
 	z-index: 2;
-	/*background-color: yellow;*/
 
 	.row {
 		display:block;
@@ -92,12 +92,9 @@ body {
 		.tile {
 			display: inline-block;
 			position: relative;
-			/*z-index: 2;*/
-
 			width: $tile-width;
 			height: $tile-height;
 			
-			/*background-color: white;*/
 			border: $border-width solid purple;
 
 			margin-top: -$border-width;
@@ -105,7 +102,6 @@ body {
 			vertical-align: top;
 
 			.tile-inner {
-				/*background-color: green;*/
 				width: 80%;
 				margin: 25% auto;
 				text-align: center;
@@ -140,15 +136,12 @@ border-radius: 25px;
 
 #player-grid {
 	@include container;
-	/*background-color: blue;*/
-
 	z-index: -1;
 
 	#muncher {
 		position: absolute;
 		width: $tile-width - (2 * $border-width);
 		height: $tile-height - (2 * $border-width);
-		/*top: $border-width;*/
 		background-color: red;
 
 		-webkit-transition: 200ms ease-in-out;
@@ -168,5 +161,29 @@ border-radius: 25px;
 				}
 			}
 		}
+	}
+}
+
+#extra-info {
+	$newWidth: $grid-columns - 2;
+	$newHeight: $grid-rows - 2;
+	$height: ($newHeight * $tile-height) + ($newHeight * $border-width / 4);
+
+	width: ($newWidth * $tile-width) - ($newWidth * $border-width);
+	margin-top: $height;
+	margin-left: ($tile-width / 2) - ($border-width * 2);
+
+	font-size: 30pt;
+
+	div:first-child {
+		display: inline-block;
+		width: $tile-width;
+	}
+
+	.score-container {
+		display: inline-block;
+		width: $tile-width * 1.5;
+		border: $border-width solid blue;
+		text-align: center;
 	}
 }

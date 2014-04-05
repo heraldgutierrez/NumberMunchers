@@ -1,25 +1,41 @@
-window.onload = function() {
-	// create muncher
-	var _MUNCHER = new Character(true, '#muncher');
+function KeyboardInputManager() {
+	this.events = {};
+	this.inMenu = true;
 
-	// create playing board
-	var _BOARD = new GameBoard();
+	this.listen();
+};
+
+// add new event handlers
+KeyboardInputManager.prototype.on = function (event, callback) {
+	if (!this.events[event]) {
+		this.events[event] = [];
+	}
+	
+	this.events[event].push(callback);
+};
+
+// call even handlers
+KeyboardInputManager.prototype.emit = function (event, data) {
+	var callbacks = this.events[event];
+	if (callbacks) {
+		callbacks.forEach(function (callback) {
+			callback(data);
+		});
+	}
+};
+
+// listen for keydown inputs, and perform the correct action
+KeyboardInputManager.prototype.listen = function() {
+	var self = this;
 
 	// on key down event
 	document.addEventListener('keydown', function(event) {
 		var modifiers = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
 		var direction = _MAP[event.which];
-		var position = _MUNCHER.getPosition();
 
 		if(!modifiers) {
 			event.preventDefault();
-			// if 'Spacebar', check tile value if it matches current objective
-			if(direction == _DIRECTION.SPACE) {
-				_BOARD.validateTile(position.y, position.x);
-			} else {
-				// otherwise move the muncher
-				_MUNCHER.move(direction);
-			}
+			self.emit('moveMuncher', direction);	// move the muncher
 		}
 	});
-}
+};

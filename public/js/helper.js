@@ -1,12 +1,14 @@
 var _GRID_ROWS = $('#grid').data('rows');
 var _GRID_COLS = $('#grid').data('columns');
+var _BASE_SCORE = 5;
 
 var _MAP = {
 	38: 0, 	// Up
 	39: 1, 	// Right
 	40: 2, 	// Down
 	37: 3,	// Left
-	32: 4 	// Spacebar
+	32: 4, 	// Spacebar
+	13: 4 	// Enter
 };
 
 var _DIRECTION = {
@@ -18,10 +20,9 @@ var _DIRECTION = {
 };
 
 var _GAMETYPES = {
-	'multiple': 0,
-	'factor': 	1,
-	'prime': 	2,
-	'equal': 	3
-}
+	MULTIPLE: 	0,
+	FACTOR: 	1,
+	PRIME: 		2
+};
 
 var _MIN_SOLUTIONS = 12;

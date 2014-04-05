@@ -1,5 +1,3 @@
-/*$grid-rows: 5;*/
-/*$grid-columns: 6;*/
 * {
   box-sizing: border-box; }
 
@@ -32,30 +30,31 @@ body {
     font-size: 15pt;
     line-height: 12pt; }
 
-/*.game-container {*/
+.game-container {
+  width: 952px;
+  height: 636px;
+  position: absolute;
+  overflow: hidden;
+  margin-top: -55px; }
+
 #grid {
   width: 952px;
   height: 636px;
   position: absolute;
-  margin-top: -55px;
   overflow: hidden;
-  z-index: 2;
-  /*background-color: yellow;*/ }
+  z-index: 2; }
   #grid .row {
     display: block; }
     #grid .row .tile {
       display: inline-block;
       position: relative;
-      /*z-index: 2;*/
       width: 140px;
       height: 110px;
-      /*background-color: white;*/
       border: 4px solid purple;
       margin-top: -4px;
       margin-left: -4px;
       vertical-align: top; }
       #grid .row .tile .tile-inner {
-        /*background-color: green;*/
         width: 80%;
         margin: 25% auto;
         text-align: center;
@@ -91,15 +90,12 @@ border-radius: 25px;
   width: 952px;
   height: 636px;
   position: absolute;
-  margin-top: -55px;
   overflow: hidden;
-  /*background-color: blue;*/
   z-index: -1; }
   #player-grid #muncher {
     position: absolute;
     width: 132px;
     height: 102px;
-    /*top: $border-width;*/
     background-color: red;
     -webkit-transition: 200ms ease-in-out;
     -moz-transition: 200ms ease-in-out;
@@ -331,3 +327,17 @@ border-radius: 25px;
       -webkit-transform: translate(882px, 581px);
       -moz-transform: translate(882px, 581px);
       transform: translate(882px, 581px); }
+
+#extra-info {
+  width: 816px;
+  margin-top: 555px;
+  margin-left: 62px;
+  font-size: 30pt; }
+  #extra-info div:first-child {
+    display: inline-block;
+    width: 140px; }
+  #extra-info .score-container {
+    display: inline-block;
+    width: 210px;
+    border: 4px solid blue;
+    text-align: center; }
