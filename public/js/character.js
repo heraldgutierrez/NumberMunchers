@@ -9,9 +9,8 @@ function Character(isMuncher, id) {
 	this.y_min = isMuncher ? 2 : 1;
 	this.y_max = isMuncher ? 6 : 7;
 
-	// starting at a random location
-	this.x = Math.floor(Math.random() * (this.x_max - this.x_min) + this.x_min);
-	this.y = Math.floor(Math.random() * (this.y_max - this.y_min) + this.y_min);
+	// start at a random position
+	this.randomPosition();
 
 	// this.element = $(id);	// which html element does this character belong to
 	this.element = id;
@@ -57,6 +56,12 @@ Character.prototype.moveCharacter = function() {
 		self.moving = false;
 		window.clearTimeout(timeout);
 	}, 175);
+};
+
+// move character to a random position
+Character.prototype.randomPosition = function() {
+	this.x = Math.floor(Math.random() * (this.x_max - this.x_min) + this.x_min);
+	this.y = Math.floor(Math.random() * (this.y_max - this.y_min) + this.y_min);
 };
 
 // return current position of the character

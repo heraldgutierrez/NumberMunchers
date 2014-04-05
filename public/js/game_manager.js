@@ -35,11 +35,11 @@ GameManager.prototype.restart = function(gametype) {
 GameManager.prototype.validateTile = function(position) {
 	var valid = this.board.validateTile(position.y, position.x);
 	if(valid) {
-		this.score += this.board.addScore();
-		this.html.displayScore(this.score);
-		this.levelComplete();
+		this.score += this.board.addScore();		// increment score
+		this.html.displayScore(this.score);			// display updated score
+		this.levelComplete();						// check if level is complete
 	} else if(valid != null){
-		this.muncherDied();
+		this.muncherDied();							// muncher lost a life
 	}
 };
 
@@ -56,29 +56,34 @@ GameManager.prototype.move = function(character, direction) {
 	var position = character.getPosition();
 
 	if(direction == _DIRECTION.SPACE) {
-		this.html.clearTile(position);
-		this.validateTile(position);
+		this.html.clearTile(position);			// clear tile value
+		this.validateTile(position);			// validate tile value
 	} else {
-		var myClass = 'position-' + position.x + '-' + position.y;
-		var id = character.getElementID();
-		this.html.removeClass(id, myClass);
-		character.move(direction);
-		this.displayCharacter(character);
+		this.removeCharacter(character);		// remove old position class
+		character.move(direction);				// move character to new position
+		this.displayCharacter(character);		// display character at new position
 	}
+};
+
+// given a character, remove its position class so it can move when a new position class is added
+GameManager.prototype.removeCharacter = function(character) {
+	var position = character.getPosition();
+	var myClass = getPositionClass(position);
+	this.html.removeClass(character.getElementID(), myClass);
 };
 
 // given a character, display then on the board using their position
 GameManager.prototype.displayCharacter = function(character) {
 	var position = character.getPosition();
-	var myClass = 'position-' + position.x + '-' + position.y;
+	var myClass = getPositionClass(position);
 	this.html.addClass(character.getElementID(), myClass);
 };
 
 // when a user validates an incorrect answer, they lose a life
 // if they run out of lives, its game over
 GameManager.prototype.muncherDied = function() {
-	this.muncher.died();
-	if(this.muncher.getLivesLeft() < 1)
+	this.muncher.died();						// reduce life by 1
+	if(this.muncher.getLivesLeft() < 1)			// if no more lives, end game
 		alert('Game Over');
 };
 
@@ -93,17 +98,19 @@ GameManager.prototype.generateBoard = function() {
 
 	// need a timeout, generate board when load screen is half way done
 	var timeout = window.setTimeout(function() {
-		self.board.generateBoard();
-		self.html.displayBoard(self.board);
-		self.displayCharacter(self.muncher);
-		window.clearTimeout(timeout);
+		self.board.generateBoard();				// generate new board
+		self.html.displayBoard(self.board);		// display new board
+		self.removeCharacter(self.muncher);		// remove position class
+		self.muncher.randomPosition();			// new random position for muncher
+		self.displayCharacter(self.muncher);	// display muncher
+		window.clearTimeout(timeout);			// clear timeout
 	}, 1000);
 
 	// after load screen is done, reset load screen to original position so it can be used again
 	var clearLoad = window.setTimeout(function() {
-		self.isLoading = false;
-		self.displayLoadingScreen(false);
-		window.clearTimeout(clearLoad);
+		self.isLoading = false;					// done loading
+		self.displayLoadingScreen(false);		// reset loading position
+		window.clearTimeout(clearLoad);			// clear loading
 	}, 3000);
 };
 
@@ -118,4 +125,8 @@ GameManager.prototype.displayLoadingScreen = function(show) {
 	this.html.displayLoad(show);
 };
 
+// get the class used for moving a character
+function getPositionClass(position) {
+	return 'position-' + position.x + '-' + position.y;
+}
 
