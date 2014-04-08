@@ -18,7 +18,14 @@ html
 		- var grid_rows = 7;
 		- var grid_columns = 8;
 
-		div.main-menu
+		div.main-screen
+			h1 Select Game Mode:
+			ul
+				li.selected Multiples
+				li Factors
+				li Primes
+
+		div.loading-screen
 			- for(var i = 0; i < ((grid_rows * 2) - 1); i++) {
 				- if(i % 2 == 0) {
 					div.even

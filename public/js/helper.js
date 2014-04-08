@@ -12,11 +12,11 @@ var _MAP = {
 };
 
 var _DIRECTION = {
-	UP:    0,
-	RIGHT: 1,
-	DOWN:  2,
-	LEFT:  3,
-	SPACE: 4
+	UP:    		0,
+	RIGHT: 		1,
+	DOWN:  		2,
+	LEFT:  		3,
+	SELECT: 	4
 };
 
 var _GAMETYPES = {
@@ -26,3 +26,9 @@ var _GAMETYPES = {
 };
 
 var _MIN_SOLUTIONS = 12;
+
+var _NAVIGATION = {
+	MENU: 		0,
+	GAME: 		1,
+	HIGHSCORE: 	2
+};

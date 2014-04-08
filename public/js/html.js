@@ -1,6 +1,11 @@
 function Html() {
 	this.scoreContainer = document.querySelector('#score');
-	this.loadingContainer = document.querySelector('.main-menu');
+	this.loadingContainer = document.querySelector('.loading-screen');
+};
+
+Html.prototype.changeMenuSelection = function(selection) {
+	this.removeClass('.main-screen .selected', 'selected');
+	this.addClass('.main-screen ul li:nth-child(' + (selection + 1) + ')', 'selected');
 };
 
 // show score
@@ -40,7 +45,7 @@ Html.prototype.addClass = function(element, myClass) {
 	document.querySelector(element).classList.add(myClass);
 };
 
-Html.prototype.displayLoad = function(show) {
+Html.prototype.displayLoading = function(show) {
 	var rows = this.loadingContainer.children;
 	for(var i = 0; i < rows.length; i++) {
 		if(show)
@@ -48,5 +53,11 @@ Html.prototype.displayLoad = function(show) {
 		else
 			rows[i].classList.remove('load');
 	}
+};
 
+Html.prototype.displayElement = function(element, show) {
+	if(show)
+		document.querySelector(element).style.display = 'block'; 
+	else
+		document.querySelector(element).style.display = 'none'; 
 };

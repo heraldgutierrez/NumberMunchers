@@ -14,8 +14,7 @@ function Character(isMuncher, id) {
 
 	// this.element = $(id);	// which html element does this character belong to
 	this.element = id;
-	this.lives = 4;				// number of lives before a game over
-	this.moveCharacter();		// display the character
+	this.resetLives();
 
 	this.moving = false;
 };
@@ -72,6 +71,10 @@ Character.prototype.getPosition = function() {
 // return the characters element html id
 Character.prototype.getElementID = function() {
 	return this.element;
+};
+
+Character.prototype.resetLives = function() {
+	this.lives = 4;				// number of lives before a game over
 };
 
 // character died, lose a life

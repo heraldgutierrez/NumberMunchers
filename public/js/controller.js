@@ -35,7 +35,7 @@ KeyboardInputManager.prototype.listen = function() {
 
 		if(!modifiers) {
 			event.preventDefault();
-			self.emit('moveMuncher', direction);	// move the muncher
+			self.emit('action', { action : direction, key : event.which });
 		}
 	});
 };

@@ -10,6 +10,7 @@ $move-distance-vertical:  $tile-height - $border-width;
 
 $container-margin: 20px;
 $container-width: (($grid-columns - 1) * $tile-width) - (($grid-columns - 1) * $border-width);
+$container-height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);
 
 @mixin container {
 	$newHeight: $grid-rows - 1;
@@ -119,11 +120,40 @@ body {
 	background: black;
 }
 
-.main-menu {
+.main-screen {
+	width: $container-width;
+	height: $container-height;
+	position: absolute;
+	z-index: 3;
+
+	text-align: center;
+	background-color: black;
+
+	h1 {
+		margin-top: 150px;
+		font-size: 5em;
+	}
+
+	ul {
+		width: ($container-width / 2);
+		margin: 0 auto;
+		font-size: 2em;
+		list-style-type: none;
+
+		li {
+			&.selected {
+				background-color: white;
+				color: black;
+			}
+		}
+	}
+}
+
+.loading-screen {
 	@include transitionProperty;
 
 	width: $container-width;
-	height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);
+	height: $container-height;
 	position: absolute;
 	z-index: 5;
 	overflow: hidden;
@@ -271,14 +301,6 @@ border-radius: 25px;
 		width: $tile-width - (2 * $border-width);
 		height: $tile-height - (2 * $border-width);
 		background-color: red;
-/*
-		-webkit-transition: 200ms ease-in-out;
-		   -moz-transition: 200ms ease-in-out;
-				transition: 200ms ease-in-out;
-
-		-webkit-transition-property: -webkit-transform;
-		   -moz-transition-property: -moz-transform;
-				transition-property: transform;*/
 
 		@include transitionProperty;
 

@@ -67,6 +67,7 @@ GameBoard.prototype.setGameType = function(type) {
 			break;
 	}
 
+	this.level = 0;
 	this.gameMode = mode;
 };
 
