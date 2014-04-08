@@ -122,9 +122,11 @@ body {
     margin: 0 auto;
     font-size: 2em;
     list-style-type: none; }
-    .main-screen ul li.selected {
-      background-color: white;
-      color: black; }
+    .main-screen ul li {
+      margin-left: -70px; }
+      .main-screen ul li.selected {
+        background-color: white;
+        color: black; }
 
 .loading-screen {
   -webkit-transition: 200ms ease-in-out;

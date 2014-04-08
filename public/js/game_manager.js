@@ -46,7 +46,7 @@ GameManager.prototype.keyboardAction = function(input) {
 					this.currentMenuSelect--;
 				break;
 			case _DIRECTION.DOWN:
-				if(this.currentMenuSelect < 2)
+				if(this.currentMenuSelect < 3)
 					this.currentMenuSelect++;
 				break;
 			case _DIRECTION.SELECT:

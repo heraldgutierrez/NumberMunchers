@@ -22,7 +22,8 @@ var _DIRECTION = {
 var _GAMETYPES = {
 	MULTIPLE: 	0,
 	FACTOR: 	1,
-	PRIME: 		2
+	PRIME: 		2,
+	RANDOM: 	3
 };
 
 var _MIN_SOLUTIONS = 12;

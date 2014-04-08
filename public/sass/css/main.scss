@@ -141,6 +141,8 @@ body {
 		list-style-type: none;
 
 		li {
+			margin-left: -$tile-width/2;
+
 			&.selected {
 				background-color: white;
 				color: black;

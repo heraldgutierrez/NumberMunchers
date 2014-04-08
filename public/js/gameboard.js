@@ -52,14 +52,19 @@ GameBoard.prototype.levelComplete = function() {
 // which game type are we playing?
 GameBoard.prototype.setGameType = function(type) {
 	var mode = null;
-	switch(type) {
-		case 0:
+	var gametype = type;
+
+	if(gametype == _GAMETYPES.RANDOM)
+		gametype = Math.floor( Math.random() * 3 );
+
+	switch(gametype) {
+		case _GAMETYPES.MULTIPLE:
 			mode = new Multiple();
 			break;
-		case 1:
+		case _GAMETYPES.FACTOR:
 			mode = new Factor();
 			break;
-		case 2:
+		case _GAMETYPES.PRIME:
 			mode = new Prime();
 			break;
 		default:
