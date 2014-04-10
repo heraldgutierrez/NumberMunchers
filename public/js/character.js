@@ -1,5 +1,5 @@
 function Character(isMuncher, id) {
-	this.is_muncher = isMuncher;		// is the character a muncher or troggle (enemy)?
+	this.isMuncher = isMuncher;		// is the character a muncher or troggle (enemy)?
 
 	// set movement limits
 	// if a muncher, only movable area is the game area
@@ -12,9 +12,8 @@ function Character(isMuncher, id) {
 	// start at a random position
 	this.randomPosition();
 
-	// this.element = $(id);	// which html element does this character belong to
-	this.element = id;
-	this.resetLives();
+	this.element = id;		// which html element does this character belong to
+	this.resetLives();		// reset number of lives
 
 	this.moving = false;
 };
@@ -59,8 +58,41 @@ Character.prototype.moveCharacter = function() {
 
 // move character to a random position
 Character.prototype.randomPosition = function() {
-	this.x = Math.floor(Math.random() * (this.x_max - this.x_min) + this.x_min);
-	this.y = Math.floor(Math.random() * (this.y_max - this.y_min) + this.y_min);
+	var row = Math.floor(Math.random() * (this.x_max - this.x_min) + this.x_min);
+	var col = Math.floor(Math.random() * (this.y_max - this.y_min) + this.y_min);
+
+	if(this.isMuncher) {
+		this.x = row;
+		this.y = col;
+	} else {
+		var which = Math.floor(Math.random() * 2) == 0;
+
+		// starting at a row (top or bottom)
+		if(which) {
+			this.x = row;
+			this.y = (row < 5) ? this.y_min : this.y_max;
+
+			if((this.x == this.x_min && this.y == this.y_min) || (this.x == this.x_max && this.y == this.y_min)) {
+				this.x = this.x_min + 1;
+			} else if((this.x == this.x_min && this.y == this.y_max) || (this.x == this.x_max && this.y == this.y_max)){
+				this.x = this.x_max - 1;
+			}
+
+			this.next_direction = (row < 5) ? _DIRECTION.DOWN : _DIRECTION.UP;
+		} else {
+		// start at a column (left of right)
+			this.x = (col < 4) ? this.x_min : this.x_max;
+			this.y = col;
+
+			if((this.x == this.x_min && this.y == this.y_min) || (this.x == this.x_max && this.y == this.y_min)) {
+				this.y = this.y_min + 1;
+			} else if((this.x == this.x_min && this.y == this.y_max) || (this.x == this.x_max && this.y == this.y_max)){
+				this.y = this.y_max - 1;
+			}
+
+			this.next_direction = (col < 4) ? _DIRECTION.RIGHT : _DIRECTION.LEFT;
+		}
+	}
 };
 
 // return current position of the character
@@ -85,4 +117,16 @@ Character.prototype.died = function() {
 // return how many lives are left
 Character.prototype.getLivesLeft = function() {
 	return this.lives;
+};
+
+Character.prototype.isMuncher = function() {
+	return this.isMuncher;
+};
+
+Character.prototype.getDirection = function() {
+	return this.next_direction;
+};
+
+Character.prototype.setDirection = function(direction) {
+	this.next_direction = direction;
 };
