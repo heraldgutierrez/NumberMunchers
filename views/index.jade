@@ -28,11 +28,7 @@ html
 
 		div.loading-screen
 			- for(var i = 0; i < ((grid_rows * 2) - 1); i++) {
-				- if(i % 2 == 0) {
-					div.even
-				- } else {
-					div.odd
-				- }
+				div
 			- }
 
 		div.header
@@ -70,9 +66,9 @@ html
 			div#player-grid
 				div#muncher
 			div.enemy-grid
-				div#enemy1
-				div#enemy2
-				div#enemy3
+				div#enemy1.troggle
+				//-div#enemy2.troggle
+				//-div#enemy3.troggle
 		div#extra-info
 			div
 				span Score:

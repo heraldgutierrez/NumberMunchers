@@ -1,16 +1,16 @@
-$tile-width: 140px;
-$tile-height: 110px;
+$TILE-WIDTH: 140px;
+$TILE-HEIGHT: 110px;
 
-$border-width: 4px;
-$grid-rows: 7;
-$grid-columns: 8;
+$BORDER-WIDTH: 4px;
+$GRID-ROWS: 7;
+$GRID-COLUMNS: 8;
 
-$move-distance-horizontal: $tile-width - $border-width;
-$move-distance-vertical:  $tile-height - $border-width;
+$MOVE-DISTANCE-HORIZONTAL: $TILE-WIDTH - $BORDER-WIDTH;
+$MOVE-DISTANCE-VERTICAL:  $TILE-HEIGHT - $BORDER-WIDTH;
 
-$container-margin: 20px;
-$container-width: (($grid-columns - 1) * $tile-width) - (($grid-columns - 1) * $border-width);
-$container-height: ($grid-rows * $tile-height) - ($grid-rows * $border-width);
+$CONTAINER-MARGIN: 20px;
+$CONTAINER-WIDTH: (($GRID-COLUMNS - 1) * $TILE-WIDTH) - (($GRID-COLUMNS - 1) * $BORDER-WIDTH);
+$container-height: ($GRID-ROWS * $TILE-HEIGHT) - ($GRID-ROWS * $BORDER-WIDTH);
 
 $MUNCHER-INDEX: 1;
 $BOARD-INDEX: 2;
@@ -19,10 +19,10 @@ $MENU-INDEX: 4;
 $LOADING-INDEX: 5;
 
 @mixin container {
-	$newHeight: $grid-rows - 1;
+	$newHeight: $GRID-ROWS - 1;
 
-	width: $container-width;
-	height: ($newHeight * $tile-height) - ($newHeight * $border-width);
+	width: $CONTAINER-WIDTH;
+	height: ($newHeight * $TILE-HEIGHT) - ($newHeight * $BORDER-WIDTH);
 	position: absolute;
 
 	overflow: hidden;
@@ -52,82 +52,20 @@ $LOADING-INDEX: 5;
 }
 
 
-@keyframes loadingEven {
-	0% { left: -$container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: $container-width; }
-}
-
-@-moz-keyframes loadingEven{
-	0% { left: -$container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: $container-width; }
-}
-
-@-webkit-keyframes loadingEven {
-	0% { left: -$container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: $container-width; }
-}
-
-@-o-keyframes loadingEven {
-	0% { left: -$container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: $container-width; }
-}
-
-@-ms-keyframes loadingEven {
-	0% { left: -$container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: $container-width; }
-}
-
-
-
-
-
-@keyframes loadingOdd {
-	0% { left: $container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: -$container-width; }
-}
-
-@-moz-keyframes loadingOdd{
-	0% { left: $container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: -$container-width; }
-}
-
-@-webkit-keyframes loadingOdd {
-	0% { left: $container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: -$container-width; }
-}
-
-@-o-keyframes loadingOdd {
-	0% { left: $container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: -$container-width; }
-}
-
-@-ms-keyframes loadingOdd {
-	0% { left: $container-width; }
-	25%, 75% { left: 0px; }
-	100% { left: -$container-width; }
-}
-
-
 * { box-sizing: border-box; }
 
 body {
-	width: $container-width;
+	width: $CONTAINER-WIDTH;
 	margin: 0 auto;
 	color: white;
 	background: black;
 }
 
+/*****************************************************
+	Main Screen Menu
+*****************************************************/
 .main-screen {
-	width: $container-width;
+	width: $CONTAINER-WIDTH;
 	height: $container-height;
 	position: absolute;
 	z-index: $MENU-INDEX;
@@ -143,13 +81,13 @@ body {
 	}
 
 	ul {
-		width: ($container-width / 2);
+		width: ($CONTAINER-WIDTH / 2);
 		margin: 0 auto;
 		font-size: 2em;
 		list-style-type: none;
 
 		li {
-			margin-left: -$tile-width/2;
+			margin-left: -$TILE-WIDTH/2;
 
 			&.selected {
 				background-color: white;
@@ -159,16 +97,20 @@ body {
 	}
 }
 
+/*****************************************************
+	Loading Screen
+*****************************************************/
 .loading-screen {
 	@include transitionProperty;
 
-	width: $container-width;
+	width: $CONTAINER-WIDTH;
 	height: $container-height;
 	position: absolute;
 	z-index: $LOADING-INDEX;
 	overflow: hidden;
 
-	$loading-height: (((($grid-rows - 0.5) * $tile-height) + (($grid-rows - 3) * $border-width))  / ($grid-rows * 2)) + $border-width;
+	$loading-height: (((($GRID-ROWS - 0.5) * $TILE-HEIGHT) + (($GRID-ROWS - 3) * $BORDER-WIDTH))  / ($GRID-ROWS * 2)) + $BORDER-WIDTH;
+	$load-time: 3s;
 
 	div {
 		width: 100%;
@@ -176,51 +118,52 @@ body {
 		background-color: green;
 		position: absolute;
 
-		@for $i from 2 through (($grid-rows * 2) - 1) {
+		@for $i from 2 through (($GRID-ROWS * 2) - 1) {
 			&:nth-child(#{$i}) { 
 				$marginTop: (($i - 1) * $loading-height);
-				@if $i > ($grid-rows) {
+				@if $i > ($GRID-ROWS) {
 					margin-top: $marginTop - 1px;
 				} @else {
 					margin-top: $marginTop;
 				}
 			}
 		}
-	}
 
-	$load-time: 3s;
-
-	.even {
-		left: -$container-width;
-		&.load {
-			-webkit-animation: loadingEven linear $load-time;
-			   -moz-animation: loadingEven linear $load-time;
-				-ms-animation: loadingEven linear $load-time;
-				 -o-animation: loadingEven linear $load-time;
-					animation: loadingEven linear $load-time;
+		&:nth-child(odd) {
+			left: -$CONTAINER-WIDTH;
+			&.load {
+				-webkit-animation: loadingEven linear $load-time;
+				   -moz-animation: loadingEven linear $load-time;
+					-ms-animation: loadingEven linear $load-time;
+					 -o-animation: loadingEven linear $load-time;
+						animation: loadingEven linear $load-time;
+			}
 		}
-	}
 
-	.odd {
-		left: $container-width;
-		&.load {
-			-webkit-animation: loadingOdd linear $load-time;
-			   -moz-animation: loadingOdd linear $load-time;
-				-ms-animation: loadingOdd linear $load-time;
-				 -o-animation: loadingOdd linear $load-time;
-					animation: loadingOdd linear $load-time;
+		&:nth-child(even) {
+			left: $CONTAINER-WIDTH;
+			&.load {
+				-webkit-animation: loadingOdd linear $load-time;
+				   -moz-animation: loadingOdd linear $load-time;
+					-ms-animation: loadingOdd linear $load-time;
+					 -o-animation: loadingOdd linear $load-time;
+						animation: loadingOdd linear $load-time;
+			}
 		}
 	}
 }
 
+/*****************************************************
+	Game Board: Board
+*****************************************************/
 .header {
-	height: $tile-height;
+	height: $TILE-HEIGHT;
 	margin-bottom: 20px;
-	margin-left: $tile-width/2;
+	margin-left: $TILE-WIDTH/2;
 
 	.level {
 		display: inline-block;
-		width: $tile-width - $border-width;
+		width: $TILE-WIDTH - $BORDER-WIDTH;
 		text-align: center;
 		margin-top: 30px;
 		vertical-align: top;
@@ -234,9 +177,9 @@ body {
 		display: inline-block;
 		margin: 20px 0;
 
-		width: (($grid-columns - 4) * $tile-width) - (($grid-columns - 3) * $border-width) -  $border-width;
-		border-top: $border-width solid red;
-		border-bottom: $border-width solid red;
+		width: (($GRID-COLUMNS - 4) * $TILE-WIDTH) - (($GRID-COLUMNS - 3) * $BORDER-WIDTH) -  $BORDER-WIDTH;
+		border-top: $BORDER-WIDTH solid red;
+		border-bottom: $BORDER-WIDTH solid red;
 		text-align: center;
 
 		font-size: 15pt;
@@ -244,10 +187,9 @@ body {
 	}
 }
 
-
 .game-container {
 	@include container;
-	margin-top: -$tile-height/2;
+	margin-top: -$TILE-HEIGHT/2;
 }
 
 #grid {
@@ -260,13 +202,13 @@ body {
 		.tile {
 			display: inline-block;
 			position: relative;
-			width: $tile-width;
-			height: $tile-height;
+			width: $TILE-WIDTH;
+			height: $TILE-HEIGHT;
 			
-			border: $border-width solid purple;
+			border: $BORDER-WIDTH solid purple;
 
-			margin-top: -$border-width;
-			margin-left: -$border-width;
+			margin-top: -$BORDER-WIDTH;
+			margin-left: -$BORDER-WIDTH;
 			vertical-align: top;
 
 			.tile-inner {
@@ -278,15 +220,15 @@ body {
 			}
 
 			&.emptyRow {
-				@include emptyTileSize($tile-width, $tile-height/2);
+				@include emptyTileSize($TILE-WIDTH, $TILE-HEIGHT/2);
 			}
 
 			&.emptyCol {
-				@include emptyTileSize($tile-width/2, $tile-height);
+				@include emptyTileSize($TILE-WIDTH/2, $TILE-HEIGHT);
 			}
 
 			&.emptyCorner {
-				@include emptyTileSize($tile-width/2, $tile-height/2);
+				@include emptyTileSize($TILE-WIDTH/2, $TILE-HEIGHT/2);
 			}
 		}
 	}
@@ -302,65 +244,149 @@ background-color: white;
 border-radius: 25px;
 } */
 
+#extra-info {
+	$newWidth: $GRID-COLUMNS - 2;
+	$newHeight: $GRID-ROWS - 2;
+	$height: ($newHeight * $TILE-HEIGHT) + ($newHeight * $BORDER-WIDTH / 4);
 
+	width: ($newWidth * $TILE-WIDTH) - ($newWidth * $BORDER-WIDTH);
+	margin-top: $height;
+	margin-left: ($TILE-WIDTH / 2) - ($BORDER-WIDTH * 2);
+
+	font-size: 30pt;
+
+	div:first-child {
+		display: inline-block;
+		width: $TILE-WIDTH;
+	}
+
+	.score-container {
+		display: inline-block;
+		width: $TILE-WIDTH * 1.5;
+		border: $BORDER-WIDTH solid blue;
+		text-align: center;
+	}
+}
+
+
+/*****************************************************
+	Game Board: Muncher Board
+*****************************************************/
 #player-grid {
 	@include container;
 	z-index: $MUNCHER-INDEX;
 
 	#muncher {
 		position: absolute;
-		width: $tile-width - (2 * $border-width);
-		height: $tile-height - (2 * $border-width);
+		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
+		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
 		background-color: red;
 
 		@include transitionProperty;
 	}
 }
 
+/*****************************************************
+	Game Board: Troggle Board;
+*****************************************************/
 .enemy-grid {
 	@include container;
 	z-index: $TROGGLE-INDEX;
 
-	#enemy1 {
+	.troggle {
 		position: absolute;
-		width: $tile-width - (2 * $border-width);
-		height: $tile-height - (2 * $border-width);
+		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
+		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
 		background-color: blue;
 
 		@include transitionProperty;
 	}
 }
 
-@for $x from 1 through $grid-columns {
-	@for $y from 1 through $grid-rows {
+
+/*****************************************************
+	Animations
+*****************************************************/
+/* .position-x-y : transformations from one tile to the next */
+@for $x from 1 through $GRID-COLUMNS {
+	@for $y from 1 through $GRID-ROWS {
 		.position-#{$x}-#{$y} {
-			$xPos: floor( ($x - 1) * $move-distance-horizontal) - ($tile-width/2);
-			$yPos: floor( ($y - 1) * $move-distance-vertical) - ($tile-height/2);
+			$xPos: floor( ($x - 1) * $MOVE-DISTANCE-HORIZONTAL) - ($TILE-WIDTH/2);
+			$yPos: floor( ($y - 1) * $MOVE-DISTANCE-VERTICAL) - ($TILE-HEIGHT/2);
 			@include transform(translate($xPos, $yPos));
+
+			/* if on the outer perimeter, hide troggle */
+			@if $x == 1 or $x == $GRID-COLUMNS or $y == 1 or $y == $GRID-ROWS {
+				display: none;
+			} @else {
+				display: block;
+			}
 		}
 	}
 }
 
-#extra-info {
-	$newWidth: $grid-columns - 2;
-	$newHeight: $grid-rows - 2;
-	$height: ($newHeight * $tile-height) + ($newHeight * $border-width / 4);
 
-	width: ($newWidth * $tile-width) - ($newWidth * $border-width);
-	margin-top: $height;
-	margin-left: ($tile-width / 2) - ($border-width * 2);
 
-	font-size: 30pt;
+/* Loading section goes from left to right */
+@keyframes loadingEven {
+	0% { left: -$CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: $CONTAINER-WIDTH; }
+}
 
-	div:first-child {
-		display: inline-block;
-		width: $tile-width;
-	}
+@-moz-keyframes loadingEven{
+	0% { left: -$CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: $CONTAINER-WIDTH; }
+}
 
-	.score-container {
-		display: inline-block;
-		width: $tile-width * 1.5;
-		border: $border-width solid blue;
-		text-align: center;
-	}
+@-webkit-keyframes loadingEven {
+	0% { left: -$CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: $CONTAINER-WIDTH; }
+}
+
+@-o-keyframes loadingEven {
+	0% { left: -$CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: $CONTAINER-WIDTH; }
+}
+
+@-ms-keyframes loadingEven {
+	0% { left: -$CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: $CONTAINER-WIDTH; }
+}
+
+
+
+/* Loading section goes from right to left */
+@keyframes loadingOdd {
+	0% { left: $CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: -$CONTAINER-WIDTH; }
+}
+
+@-moz-keyframes loadingOdd{
+	0% { left: $CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: -$CONTAINER-WIDTH; }
+}
+
+@-webkit-keyframes loadingOdd {
+	0% { left: $CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: -$CONTAINER-WIDTH; }
+}
+
+@-o-keyframes loadingOdd {
+	0% { left: $CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: -$CONTAINER-WIDTH; }
+}
+
+@-ms-keyframes loadingOdd {
+	0% { left: $CONTAINER-WIDTH; }
+	25%, 75% { left: 0px; }
+	100% { left: -$CONTAINER-WIDTH; }
 }

@@ -137,12 +137,9 @@ GameManager.prototype.moveAI = function(character) {
 			else {
 			// else: character went outside game area, reset character
 				var timeout2 = window.setTimeout(function() {
-					self.html.displayElement(id, false);		// hide the character element
 					self.removeCharacter(character);			// remove the characters position class
 					character.randomPosition();					// generate a new position
 					self.displayCharacter(character);			// display the character
-
-					self.html.displayElement(id, true);			// show the character element
 					window.clearTimeout(timeout2);				// clear timeout
 
 					self.startAI();								// call start AI to move the AI again
@@ -150,15 +147,9 @@ GameManager.prototype.moveAI = function(character) {
 			}
 		} else {
 		// we're no longer playing, stop moving AI
-			self.html.displayElement(id, false);			
 			self.removeCharacter(character);
 			character.randomPosition();
 			self.displayCharacter(character);
-
-			var timeout2 = window.setTimeout(function() {
-				self.html.displayElement(id, true);
-				window.clearTimeout(timeout2);			// clear timeout
-			}, 500);
 		}
 	}, 2500);
 };

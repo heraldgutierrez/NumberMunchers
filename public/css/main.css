@@ -1,103 +1,3 @@
-@keyframes loadingEven {
-  0% {
-    left: -952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: 952px; } }
-
-@-moz-keyframes loadingEven {
-  0% {
-    left: -952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: 952px; } }
-
-@-webkit-keyframes loadingEven {
-  0% {
-    left: -952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: 952px; } }
-
-@-o-keyframes loadingEven {
-  0% {
-    left: -952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: 952px; } }
-
-@-ms-keyframes loadingEven {
-  0% {
-    left: -952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: 952px; } }
-
-@keyframes loadingOdd {
-  0% {
-    left: 952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: -952px; } }
-
-@-moz-keyframes loadingOdd {
-  0% {
-    left: 952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: -952px; } }
-
-@-webkit-keyframes loadingOdd {
-  0% {
-    left: 952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: -952px; } }
-
-@-o-keyframes loadingOdd {
-  0% {
-    left: 952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: -952px; } }
-
-@-ms-keyframes loadingOdd {
-  0% {
-    left: 952px; }
-
-  25%, 75% {
-    left: 0px; }
-
-  100% {
-    left: -952px; } }
-
 * {
   box-sizing: border-box; }
 
@@ -107,6 +7,9 @@ body {
   color: white;
   background: black; }
 
+/*****************************************************
+	Main Screen Menu
+*****************************************************/
 .main-screen {
   width: 952px;
   height: 742px;
@@ -129,6 +32,9 @@ body {
         background-color: white;
         color: black; }
 
+/*****************************************************
+	Loading Screen
+*****************************************************/
 .loading-screen {
   -webkit-transition: 200ms ease-in-out;
   -moz-transition: 200ms ease-in-out;
@@ -170,23 +76,26 @@ body {
       margin-top: 617.35714px; }
     .loading-screen div:nth-child(13) {
       margin-top: 673.57143px; }
-  .loading-screen .even {
-    left: -952px; }
-    .loading-screen .even.load {
-      -webkit-animation: loadingEven linear 3s;
-      -moz-animation: loadingEven linear 3s;
-      -ms-animation: loadingEven linear 3s;
-      -o-animation: loadingEven linear 3s;
-      animation: loadingEven linear 3s; }
-  .loading-screen .odd {
-    left: 952px; }
-    .loading-screen .odd.load {
-      -webkit-animation: loadingOdd linear 3s;
-      -moz-animation: loadingOdd linear 3s;
-      -ms-animation: loadingOdd linear 3s;
-      -o-animation: loadingOdd linear 3s;
-      animation: loadingOdd linear 3s; }
+    .loading-screen div:nth-child(odd) {
+      left: -952px; }
+      .loading-screen div:nth-child(odd).load {
+        -webkit-animation: loadingEven linear 3s;
+        -moz-animation: loadingEven linear 3s;
+        -ms-animation: loadingEven linear 3s;
+        -o-animation: loadingEven linear 3s;
+        animation: loadingEven linear 3s; }
+    .loading-screen div:nth-child(even) {
+      left: 952px; }
+      .loading-screen div:nth-child(even).load {
+        -webkit-animation: loadingOdd linear 3s;
+        -moz-animation: loadingOdd linear 3s;
+        -ms-animation: loadingOdd linear 3s;
+        -o-animation: loadingOdd linear 3s;
+        animation: loadingOdd linear 3s; }
 
+/*****************************************************
+	Game Board: Board
+*****************************************************/
 .header {
   height: 110px;
   margin-bottom: 20px;
@@ -266,6 +175,23 @@ width:106px;
 background-color: white;
 border-radius: 25px;
 } */
+#extra-info {
+  width: 816px;
+  margin-top: 555px;
+  margin-left: 62px;
+  font-size: 30pt; }
+  #extra-info div:first-child {
+    display: inline-block;
+    width: 140px; }
+  #extra-info .score-container {
+    display: inline-block;
+    width: 210px;
+    border: 4px solid blue;
+    text-align: center; }
+
+/*****************************************************
+	Game Board: Muncher Board
+*****************************************************/
 #player-grid {
   width: 952px;
   height: 636px;
@@ -284,13 +210,16 @@ border-radius: 25px;
     -moz-transition-property: -moz-transform;
     transition-property: transform; }
 
+/*****************************************************
+	Game Board: Troggle Board;
+*****************************************************/
 .enemy-grid {
   width: 952px;
   height: 636px;
   position: absolute;
   overflow: hidden;
   z-index: 3; }
-  .enemy-grid #enemy1 {
+  .enemy-grid .troggle {
     position: absolute;
     width: 132px;
     height: 102px;
@@ -302,296 +231,500 @@ border-radius: 25px;
     -moz-transition-property: -moz-transform;
     transition-property: transform; }
 
+/*****************************************************
+	Animations
+*****************************************************/
+/* .position-x-y : transformations from one tile to the next */
 .position-1-1 {
   -webkit-transform: translate(-70px, -55px);
   -moz-transform: translate(-70px, -55px);
-  transform: translate(-70px, -55px); }
+  transform: translate(-70px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-1-2 {
   -webkit-transform: translate(-70px, 51px);
   -moz-transform: translate(-70px, 51px);
-  transform: translate(-70px, 51px); }
+  transform: translate(-70px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-1-3 {
   -webkit-transform: translate(-70px, 157px);
   -moz-transform: translate(-70px, 157px);
-  transform: translate(-70px, 157px); }
+  transform: translate(-70px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-1-4 {
   -webkit-transform: translate(-70px, 263px);
   -moz-transform: translate(-70px, 263px);
-  transform: translate(-70px, 263px); }
+  transform: translate(-70px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-1-5 {
   -webkit-transform: translate(-70px, 369px);
   -moz-transform: translate(-70px, 369px);
-  transform: translate(-70px, 369px); }
+  transform: translate(-70px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-1-6 {
   -webkit-transform: translate(-70px, 475px);
   -moz-transform: translate(-70px, 475px);
-  transform: translate(-70px, 475px); }
+  transform: translate(-70px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-1-7 {
   -webkit-transform: translate(-70px, 581px);
   -moz-transform: translate(-70px, 581px);
-  transform: translate(-70px, 581px); }
+  transform: translate(-70px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-2-1 {
   -webkit-transform: translate(66px, -55px);
   -moz-transform: translate(66px, -55px);
-  transform: translate(66px, -55px); }
+  transform: translate(66px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-2-2 {
   -webkit-transform: translate(66px, 51px);
   -moz-transform: translate(66px, 51px);
-  transform: translate(66px, 51px); }
+  transform: translate(66px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-2-3 {
   -webkit-transform: translate(66px, 157px);
   -moz-transform: translate(66px, 157px);
-  transform: translate(66px, 157px); }
+  transform: translate(66px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-2-4 {
   -webkit-transform: translate(66px, 263px);
   -moz-transform: translate(66px, 263px);
-  transform: translate(66px, 263px); }
+  transform: translate(66px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-2-5 {
   -webkit-transform: translate(66px, 369px);
   -moz-transform: translate(66px, 369px);
-  transform: translate(66px, 369px); }
+  transform: translate(66px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-2-6 {
   -webkit-transform: translate(66px, 475px);
   -moz-transform: translate(66px, 475px);
-  transform: translate(66px, 475px); }
+  transform: translate(66px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-2-7 {
   -webkit-transform: translate(66px, 581px);
   -moz-transform: translate(66px, 581px);
-  transform: translate(66px, 581px); }
+  transform: translate(66px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-3-1 {
   -webkit-transform: translate(202px, -55px);
   -moz-transform: translate(202px, -55px);
-  transform: translate(202px, -55px); }
+  transform: translate(202px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-3-2 {
   -webkit-transform: translate(202px, 51px);
   -moz-transform: translate(202px, 51px);
-  transform: translate(202px, 51px); }
+  transform: translate(202px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-3-3 {
   -webkit-transform: translate(202px, 157px);
   -moz-transform: translate(202px, 157px);
-  transform: translate(202px, 157px); }
+  transform: translate(202px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-3-4 {
   -webkit-transform: translate(202px, 263px);
   -moz-transform: translate(202px, 263px);
-  transform: translate(202px, 263px); }
+  transform: translate(202px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-3-5 {
   -webkit-transform: translate(202px, 369px);
   -moz-transform: translate(202px, 369px);
-  transform: translate(202px, 369px); }
+  transform: translate(202px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-3-6 {
   -webkit-transform: translate(202px, 475px);
   -moz-transform: translate(202px, 475px);
-  transform: translate(202px, 475px); }
+  transform: translate(202px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-3-7 {
   -webkit-transform: translate(202px, 581px);
   -moz-transform: translate(202px, 581px);
-  transform: translate(202px, 581px); }
+  transform: translate(202px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-4-1 {
   -webkit-transform: translate(338px, -55px);
   -moz-transform: translate(338px, -55px);
-  transform: translate(338px, -55px); }
+  transform: translate(338px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-4-2 {
   -webkit-transform: translate(338px, 51px);
   -moz-transform: translate(338px, 51px);
-  transform: translate(338px, 51px); }
+  transform: translate(338px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-4-3 {
   -webkit-transform: translate(338px, 157px);
   -moz-transform: translate(338px, 157px);
-  transform: translate(338px, 157px); }
+  transform: translate(338px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-4-4 {
   -webkit-transform: translate(338px, 263px);
   -moz-transform: translate(338px, 263px);
-  transform: translate(338px, 263px); }
+  transform: translate(338px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-4-5 {
   -webkit-transform: translate(338px, 369px);
   -moz-transform: translate(338px, 369px);
-  transform: translate(338px, 369px); }
+  transform: translate(338px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-4-6 {
   -webkit-transform: translate(338px, 475px);
   -moz-transform: translate(338px, 475px);
-  transform: translate(338px, 475px); }
+  transform: translate(338px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-4-7 {
   -webkit-transform: translate(338px, 581px);
   -moz-transform: translate(338px, 581px);
-  transform: translate(338px, 581px); }
+  transform: translate(338px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-5-1 {
   -webkit-transform: translate(474px, -55px);
   -moz-transform: translate(474px, -55px);
-  transform: translate(474px, -55px); }
+  transform: translate(474px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-5-2 {
   -webkit-transform: translate(474px, 51px);
   -moz-transform: translate(474px, 51px);
-  transform: translate(474px, 51px); }
+  transform: translate(474px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-5-3 {
   -webkit-transform: translate(474px, 157px);
   -moz-transform: translate(474px, 157px);
-  transform: translate(474px, 157px); }
+  transform: translate(474px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-5-4 {
   -webkit-transform: translate(474px, 263px);
   -moz-transform: translate(474px, 263px);
-  transform: translate(474px, 263px); }
+  transform: translate(474px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-5-5 {
   -webkit-transform: translate(474px, 369px);
   -moz-transform: translate(474px, 369px);
-  transform: translate(474px, 369px); }
+  transform: translate(474px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-5-6 {
   -webkit-transform: translate(474px, 475px);
   -moz-transform: translate(474px, 475px);
-  transform: translate(474px, 475px); }
+  transform: translate(474px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-5-7 {
   -webkit-transform: translate(474px, 581px);
   -moz-transform: translate(474px, 581px);
-  transform: translate(474px, 581px); }
+  transform: translate(474px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-6-1 {
   -webkit-transform: translate(610px, -55px);
   -moz-transform: translate(610px, -55px);
-  transform: translate(610px, -55px); }
+  transform: translate(610px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-6-2 {
   -webkit-transform: translate(610px, 51px);
   -moz-transform: translate(610px, 51px);
-  transform: translate(610px, 51px); }
+  transform: translate(610px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-6-3 {
   -webkit-transform: translate(610px, 157px);
   -moz-transform: translate(610px, 157px);
-  transform: translate(610px, 157px); }
+  transform: translate(610px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-6-4 {
   -webkit-transform: translate(610px, 263px);
   -moz-transform: translate(610px, 263px);
-  transform: translate(610px, 263px); }
+  transform: translate(610px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-6-5 {
   -webkit-transform: translate(610px, 369px);
   -moz-transform: translate(610px, 369px);
-  transform: translate(610px, 369px); }
+  transform: translate(610px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-6-6 {
   -webkit-transform: translate(610px, 475px);
   -moz-transform: translate(610px, 475px);
-  transform: translate(610px, 475px); }
+  transform: translate(610px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-6-7 {
   -webkit-transform: translate(610px, 581px);
   -moz-transform: translate(610px, 581px);
-  transform: translate(610px, 581px); }
+  transform: translate(610px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-7-1 {
   -webkit-transform: translate(746px, -55px);
   -moz-transform: translate(746px, -55px);
-  transform: translate(746px, -55px); }
+  transform: translate(746px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-7-2 {
   -webkit-transform: translate(746px, 51px);
   -moz-transform: translate(746px, 51px);
-  transform: translate(746px, 51px); }
+  transform: translate(746px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-7-3 {
   -webkit-transform: translate(746px, 157px);
   -moz-transform: translate(746px, 157px);
-  transform: translate(746px, 157px); }
+  transform: translate(746px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-7-4 {
   -webkit-transform: translate(746px, 263px);
   -moz-transform: translate(746px, 263px);
-  transform: translate(746px, 263px); }
+  transform: translate(746px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-7-5 {
   -webkit-transform: translate(746px, 369px);
   -moz-transform: translate(746px, 369px);
-  transform: translate(746px, 369px); }
+  transform: translate(746px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-7-6 {
   -webkit-transform: translate(746px, 475px);
   -moz-transform: translate(746px, 475px);
-  transform: translate(746px, 475px); }
+  transform: translate(746px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: block; }
 
 .position-7-7 {
   -webkit-transform: translate(746px, 581px);
   -moz-transform: translate(746px, 581px);
-  transform: translate(746px, 581px); }
+  transform: translate(746px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-1 {
   -webkit-transform: translate(882px, -55px);
   -moz-transform: translate(882px, -55px);
-  transform: translate(882px, -55px); }
+  transform: translate(882px, -55px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-2 {
   -webkit-transform: translate(882px, 51px);
   -moz-transform: translate(882px, 51px);
-  transform: translate(882px, 51px); }
+  transform: translate(882px, 51px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-3 {
   -webkit-transform: translate(882px, 157px);
   -moz-transform: translate(882px, 157px);
-  transform: translate(882px, 157px); }
+  transform: translate(882px, 157px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-4 {
   -webkit-transform: translate(882px, 263px);
   -moz-transform: translate(882px, 263px);
-  transform: translate(882px, 263px); }
+  transform: translate(882px, 263px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-5 {
   -webkit-transform: translate(882px, 369px);
   -moz-transform: translate(882px, 369px);
-  transform: translate(882px, 369px); }
+  transform: translate(882px, 369px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-6 {
   -webkit-transform: translate(882px, 475px);
   -moz-transform: translate(882px, 475px);
-  transform: translate(882px, 475px); }
+  transform: translate(882px, 475px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
 .position-8-7 {
   -webkit-transform: translate(882px, 581px);
   -moz-transform: translate(882px, 581px);
-  transform: translate(882px, 581px); }
+  transform: translate(882px, 581px);
+  /* if on the outer perimeter, hide troggle */
+  display: none; }
 
-#extra-info {
-  width: 816px;
-  margin-top: 555px;
-  margin-left: 62px;
-  font-size: 30pt; }
-  #extra-info div:first-child {
-    display: inline-block;
-    width: 140px; }
-  #extra-info .score-container {
-    display: inline-block;
-    width: 210px;
-    border: 4px solid blue;
-    text-align: center; }
+/* Loading section goes from left to right */
+@keyframes loadingEven {
+  0% {
+    left: -952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: 952px; } }
+
+@-moz-keyframes loadingEven {
+  0% {
+    left: -952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: 952px; } }
+
+@-webkit-keyframes loadingEven {
+  0% {
+    left: -952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: 952px; } }
+
+@-o-keyframes loadingEven {
+  0% {
+    left: -952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: 952px; } }
+
+@-ms-keyframes loadingEven {
+  0% {
+    left: -952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: 952px; } }
+
+/* Loading section goes from right to left */
+@keyframes loadingOdd {
+  0% {
+    left: 952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: -952px; } }
+
+@-moz-keyframes loadingOdd {
+  0% {
+    left: 952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: -952px; } }
+
+@-webkit-keyframes loadingOdd {
+  0% {
+    left: 952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: -952px; } }
+
+@-o-keyframes loadingOdd {
+  0% {
+    left: 952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: -952px; } }
+
+@-ms-keyframes loadingOdd {
+  0% {
+    left: 952px; }
+
+  25%, 75% {
+    left: 0px; }
+
+  100% {
+    left: -952px; } }
