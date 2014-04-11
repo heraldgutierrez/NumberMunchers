@@ -94,13 +94,13 @@ GameManager.prototype.startAI = function() {
 	var self = this;
 	var troggle;
 
-	if(this.navigation == _NAVIGATION.GAME && !this.isLoading) {
+	if(this.navigation == _NAVIGATION.GAME) {
 		var timeout = window.setTimeout(function() {
 			// console.log('Starting AI...');
 			self.moveAI(self.troggle1);
 			window.clearTimeout(timeout);			// clear timeout
 		}, 5000);
-	}
+	} 
 };
 
 
@@ -160,7 +160,7 @@ GameManager.prototype.moveAI = function(character) {
 				window.clearTimeout(timeout2);			// clear timeout
 			}, 500);
 		}
-	}, 1000);
+	}, 2500);
 };
 
 // given a character (muncher or troggle), move in a direction
@@ -293,6 +293,7 @@ GameManager.prototype.generateBoard = function() {
 		self.removeCharacter(self.troggle1);	// remove position class
 		self.troggle1.randomPosition();			// new random position for muncher
 		self.displayCharacter(self.troggle1);	// display muncher
+
 		self.startAI();							// start moving AI
 		window.clearTimeout(timeout);			// clear timeout
 	}, 1000);
