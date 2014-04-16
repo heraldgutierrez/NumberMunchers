@@ -280,7 +280,8 @@ border-radius: 25px;
 		position: absolute;
 		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
 		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
-		background-color: red;
+		background: transparent url("/img/muncher.png") 0 0 no-repeat;	
+		background-size: $TILE-WIDTH $TILE-HEIGHT;
 
 		@include transitionProperty;
 	}
