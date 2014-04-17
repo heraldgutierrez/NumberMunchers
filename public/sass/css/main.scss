@@ -281,7 +281,6 @@ border-radius: 25px;
 		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
 		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
 		background: transparent url("/img/muncher.png") 0 0 no-repeat;	
-		background-size: $TILE-WIDTH $TILE-HEIGHT;
 
 		@include transitionProperty;
 	}
@@ -298,7 +297,7 @@ border-radius: 25px;
 		position: absolute;
 		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
 		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
-		background-color: blue;
+		background: transparent url("/img/troggle.png") 0 0 no-repeat;	
 
 		@include transitionProperty;
 	}

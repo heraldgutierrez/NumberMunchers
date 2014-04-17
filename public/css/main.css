@@ -203,7 +203,7 @@ border-radius: 25px;
     width: 132px;
     height: 102px;
     background: transparent url("/img/muncher.png") 0 0 no-repeat;
-    background-size: 140px 110px;
+    /*background-size: $TILE-WIDTH $TILE-HEIGHT;*/
     -webkit-transition: 200ms ease-in-out;
     -moz-transition: 200ms ease-in-out;
     transition: 200ms ease-in-out;
@@ -224,7 +224,8 @@ border-radius: 25px;
     position: absolute;
     width: 132px;
     height: 102px;
-    background-color: blue;
+    background: transparent url("/img/troggle.png") 0 0 no-repeat;
+    /*background-size: $TILE-WIDTH $TILE-HEIGHT;*/
     -webkit-transition: 200ms ease-in-out;
     -moz-transition: 200ms ease-in-out;
     transition: 200ms ease-in-out;
