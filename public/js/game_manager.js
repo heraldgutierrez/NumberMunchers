@@ -41,6 +41,7 @@ GameManager.prototype.restart = function() {
 	this.currentMenuSelect = 0;								// current menu selection is 0 (Multiples)
 	this.html.changeMenuSelection(this.currentMenuSelect);	// highlight current selection
 	this.muncher.resetLives();								// reset munchers lives
+	this.html.displayLives(this.muncher.getLivesLeft() - 1);
 };
 
 // reset the game board
@@ -198,17 +199,6 @@ GameManager.prototype.checkCollision = function(character) {
 				// if either characters are the muncher, lose a life
 				if(character.isMuncher || tempChar.isMuncher) {			
 					this.muncherDied('Oh no, you were eaten by a Troggle.');
-
-					// this.html.displayElement(tempID, false);
-					// this.removeCharacter(tempChar);
-					// tempChar.randomPosition();
-					// this.displayCharacter(tempChar);
-
-					// var self = this;
-					// var timeout = window.setTimeout(function() {
-					// 	self.html.displayElement(tempID, true);
-					// 	window.clearTimeout(timeout);			// clear timeout
-					// }, 500);
 				} else {
 				// else its another troggle/enemy, so this one gets deleted
 					this.html.displayElement(charID, false);
@@ -256,8 +246,10 @@ GameManager.prototype.muncherDied = function(string) {
 			window.clearTimeout(timeout);		// clear timeout	
 		}, 1000);
 	} else {
-		var str = '\n' + this.muncher.getLivesLeft() + ' Lives Left!';
+		var lives = this.muncher.getLivesLeft();
+		var str = '\n' + lives + ' Lives Left!';
 		alert(string + str);
+		this.html.displayLives(lives - 1);
 	}
 };
 

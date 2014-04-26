@@ -1,6 +1,7 @@
 var _GRID_ROWS = $('#grid').data('rows');
 var _GRID_COLS = $('#grid').data('columns');
 var _BASE_SCORE = 5;
+var _BASE_LIVES = 4;
 
 var _MAP = {
 	38: 0, 	// Up

@@ -10,7 +10,7 @@ $MOVE-DISTANCE-VERTICAL:  $TILE-HEIGHT - $BORDER-WIDTH;
 
 $CONTAINER-MARGIN: 20px;
 $CONTAINER-WIDTH: (($GRID-COLUMNS - 1) * $TILE-WIDTH) - (($GRID-COLUMNS - 1) * $BORDER-WIDTH);
-$container-height: ($GRID-ROWS * $TILE-HEIGHT) - ($GRID-ROWS * $BORDER-WIDTH);
+$CONTAINER-HEIGHT: (($GRID-ROWS + 0.25) * $TILE-HEIGHT) - ($GRID-ROWS * $BORDER-WIDTH);
 
 $MUNCHER-INDEX: 1;
 $BOARD-INDEX: 2;
@@ -66,7 +66,7 @@ body {
 *****************************************************/
 .main-screen {
 	width: $CONTAINER-WIDTH;
-	height: $container-height;
+	height: $CONTAINER-HEIGHT;
 	position: absolute;
 	z-index: $MENU-INDEX;
 
@@ -104,12 +104,12 @@ body {
 	@include transitionProperty;
 
 	width: $CONTAINER-WIDTH;
-	height: $container-height;
+	height: $CONTAINER-HEIGHT;
 	position: absolute;
 	z-index: $LOADING-INDEX;
 	overflow: hidden;
 
-	$loading-height: (((($GRID-ROWS - 0.5) * $TILE-HEIGHT) + (($GRID-ROWS - 3) * $BORDER-WIDTH))  / ($GRID-ROWS * 2)) + $BORDER-WIDTH;
+	$loading-height: ((($GRID-ROWS * $TILE-HEIGHT) + (($GRID-ROWS - 3) * $BORDER-WIDTH))  / ($GRID-ROWS * 2)) + $BORDER-WIDTH;
 	$load-time: 3s;
 
 	div {
@@ -217,6 +217,7 @@ body {
 				text-align: center;
 				font-size: 15pt;
 				color: white;
+				background-color: black;
 			}
 
 			&.emptyRow {
@@ -244,12 +245,18 @@ background-color: white;
 border-radius: 25px;
 } */
 
+.muncher {
+	background: transparent url("/img/muncher.png") 0 0 no-repeat;	
+	background-size: 100% 100%;
+}
+
 #extra-info {
 	$newWidth: $GRID-COLUMNS - 2;
 	$newHeight: $GRID-ROWS - 2;
 	$height: ($newHeight * $TILE-HEIGHT) + ($newHeight * $BORDER-WIDTH / 4);
 
 	width: ($newWidth * $TILE-WIDTH) - ($newWidth * $BORDER-WIDTH);
+	height: $TILE-HEIGHT;
 	margin-top: $height;
 	margin-left: ($TILE-WIDTH / 2) - ($BORDER-WIDTH * 2);
 
@@ -262,9 +269,24 @@ border-radius: 25px;
 
 	.score-container {
 		display: inline-block;
-		width: $TILE-WIDTH * 1.5;
+		width: ($TILE-WIDTH - ($BORDER-WIDTH * 2)) * 2;
 		border: $BORDER-WIDTH solid blue;
 		text-align: center;
+	}
+
+	.lives {
+		display: inline-block;
+		width: $TILE-WIDTH * 2.5;
+		/*margin-left: 50px;*/
+		margin-left: $TILE-WIDTH / 4; 
+		vertical-align: middle;
+
+		.life {
+			display: inline-block;
+			width: $TILE-WIDTH * 0.8;
+			height: $TILE-HEIGHT;
+			
+		}
 	}
 }
 
@@ -280,7 +302,6 @@ border-radius: 25px;
 		position: absolute;
 		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
 		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
-		background: transparent url("/img/muncher.png") 0 0 no-repeat;	
 
 		@include transitionProperty;
 	}
@@ -297,7 +318,8 @@ border-radius: 25px;
 		position: absolute;
 		width: $TILE-WIDTH - (2 * $BORDER-WIDTH);
 		height: $TILE-HEIGHT - (2 * $BORDER-WIDTH);
-		background: transparent url("/img/troggle.png") 0 0 no-repeat;	
+		background: url("/img/troggle.png") 0 0 no-repeat;	
+		background-size: 100% 100%;
 
 		@include transitionProperty;
 	}

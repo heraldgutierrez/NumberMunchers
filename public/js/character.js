@@ -106,7 +106,7 @@ Character.prototype.getElementID = function() {
 };
 
 Character.prototype.resetLives = function() {
-	this.lives = 4;				// number of lives before a game over
+	this.lives = _BASE_LIVES;				// number of lives before a game over
 };
 
 // character died, lose a life

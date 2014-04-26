@@ -35,6 +35,15 @@ Html.prototype.displayBoard = function(board) {
 	}
 };
 
+Html.prototype.displayLives = function(livesLeft) {
+	var lives = document.querySelectorAll('.life');
+	for(var i = 0; i < _BASE_LIVES - 1; i++) {
+		lives[i].style.visibility = 'hidden';
+		if(i < livesLeft)
+			lives[i].style.visibility = 'visible';
+	}
+};
+
 // remove a specific class from an element
 Html.prototype.removeClass = function(element, myClass) {
 	document.querySelector(element).classList.remove(myClass);

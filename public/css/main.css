@@ -12,7 +12,7 @@ body {
 *****************************************************/
 .main-screen {
   width: 952px;
-  height: 742px;
+  height: 769.5px;
   position: absolute;
   z-index: 4;
   text-align: center;
@@ -43,39 +43,39 @@ body {
   -moz-transition-property: -moz-transform;
   transition-property: transform;
   width: 952px;
-  height: 742px;
+  height: 769.5px;
   position: absolute;
   z-index: 5;
   overflow: hidden; }
   .loading-screen div {
     width: 100%;
-    height: 56.21429px;
+    height: 60.14286px;
     background-color: green;
     position: absolute; }
     .loading-screen div:nth-child(2) {
-      margin-top: 56.21429px; }
+      margin-top: 60.14286px; }
     .loading-screen div:nth-child(3) {
-      margin-top: 112.42857px; }
+      margin-top: 120.28571px; }
     .loading-screen div:nth-child(4) {
-      margin-top: 168.64286px; }
+      margin-top: 180.42857px; }
     .loading-screen div:nth-child(5) {
-      margin-top: 224.85714px; }
+      margin-top: 240.57143px; }
     .loading-screen div:nth-child(6) {
-      margin-top: 281.07143px; }
+      margin-top: 300.71429px; }
     .loading-screen div:nth-child(7) {
-      margin-top: 337.28571px; }
+      margin-top: 360.85714px; }
     .loading-screen div:nth-child(8) {
-      margin-top: 392.5px; }
+      margin-top: 420px; }
     .loading-screen div:nth-child(9) {
-      margin-top: 448.71429px; }
+      margin-top: 480.14286px; }
     .loading-screen div:nth-child(10) {
-      margin-top: 504.92857px; }
+      margin-top: 540.28571px; }
     .loading-screen div:nth-child(11) {
-      margin-top: 561.14286px; }
+      margin-top: 600.42857px; }
     .loading-screen div:nth-child(12) {
-      margin-top: 617.35714px; }
+      margin-top: 660.57143px; }
     .loading-screen div:nth-child(13) {
-      margin-top: 673.57143px; }
+      margin-top: 720.71429px; }
     .loading-screen div:nth-child(odd) {
       left: -952px; }
       .loading-screen div:nth-child(odd).load {
@@ -148,7 +148,8 @@ body {
         margin: 25% auto;
         text-align: center;
         font-size: 15pt;
-        color: white; }
+        color: white;
+        background-color: black; }
       #grid .row .tile.emptyRow {
         width: 140px;
         height: 55px;
@@ -175,8 +176,13 @@ width:106px;
 background-color: white;
 border-radius: 25px;
 } */
+.muncher {
+  background: transparent url("/img/muncher.png") 0 0 no-repeat;
+  background-size: 100% 100%; }
+
 #extra-info {
   width: 816px;
+  height: 110px;
   margin-top: 555px;
   margin-left: 62px;
   font-size: 30pt; }
@@ -185,9 +191,19 @@ border-radius: 25px;
     width: 140px; }
   #extra-info .score-container {
     display: inline-block;
-    width: 210px;
+    width: 264px;
     border: 4px solid blue;
     text-align: center; }
+  #extra-info .lives {
+    display: inline-block;
+    width: 350px;
+    /*margin-left: 50px;*/
+    margin-left: 35px;
+    vertical-align: middle; }
+    #extra-info .lives .life {
+      display: inline-block;
+      width: 112px;
+      height: 110px; }
 
 /*****************************************************
 	Game Board: Muncher Board
@@ -202,8 +218,6 @@ border-radius: 25px;
     position: absolute;
     width: 132px;
     height: 102px;
-    background: transparent url("/img/muncher.png") 0 0 no-repeat;
-    /*background-size: $TILE-WIDTH $TILE-HEIGHT;*/
     -webkit-transition: 200ms ease-in-out;
     -moz-transition: 200ms ease-in-out;
     transition: 200ms ease-in-out;
@@ -224,8 +238,8 @@ border-radius: 25px;
     position: absolute;
     width: 132px;
     height: 102px;
-    background: transparent url("/img/troggle.png") 0 0 no-repeat;
-    /*background-size: $TILE-WIDTH $TILE-HEIGHT;*/
+    background: url("/img/troggle.png") 0 0 no-repeat;
+    background-size: 100% 100%;
     -webkit-transition: 200ms ease-in-out;
     -moz-transition: 200ms ease-in-out;
     transition: 200ms ease-in-out;
