@@ -22,7 +22,7 @@ app.configure(function() {
 		sass.middleware({
 			src: __dirname + '/public/sass',
 			dest: __dirname + '/public',
-			debug: true
+			debug: false
 		})
 	);
 

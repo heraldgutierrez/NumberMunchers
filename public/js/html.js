@@ -44,6 +44,12 @@ Html.prototype.displayLives = function(livesLeft) {
 	}
 };
 
+Html.prototype.displayMuncherDied = function(msg) {
+	var container = document.querySelector('.muncher-died span');
+	var message = msg + '\nPress SPACE BAR to continue';
+	container.innerText = message;
+};
+
 // remove a specific class from an element
 Html.prototype.removeClass = function(element, myClass) {
 	document.querySelector(element).classList.remove(myClass);

@@ -32,5 +32,6 @@ var _MIN_SOLUTIONS = 12;
 var _NAVIGATION = {
 	MENU: 		0,
 	GAME: 		1,
-	HIGHSCORE: 	2
+	MESSAGE: 	2,
+	HIGHSCORE: 	3
 };

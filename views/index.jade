@@ -39,6 +39,8 @@ html
 			div.game-mode
 				h1#mode Multiples of 2
 		div.game-container
+			div.muncher-died
+				span
 			div#grid(data-rows=grid_rows data-columns=grid_columns)
 				- for(var i = 0; i < grid_rows; i++) {
 					div.row
@@ -69,6 +71,8 @@ html
 				div#enemy1.troggle
 				//-div#enemy2.troggle
 				//-div#enemy3.troggle
+			
+
 		div#extra-info
 			div
 				span Score:

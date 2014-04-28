@@ -12,11 +12,22 @@ $CONTAINER-MARGIN: 20px;
 $CONTAINER-WIDTH: (($GRID-COLUMNS - 1) * $TILE-WIDTH) - (($GRID-COLUMNS - 1) * $BORDER-WIDTH);
 $CONTAINER-HEIGHT: (($GRID-ROWS + 0.25) * $TILE-HEIGHT) - ($GRID-ROWS * $BORDER-WIDTH);
 
-$MUNCHER-INDEX: 1;
-$BOARD-INDEX: 2;
-$TROGGLE-INDEX: 3;
-$MENU-INDEX: 4;
-$LOADING-INDEX: 5;
+$INDEX-MUNCHER: 1;
+$INDEX-BOARD: 2;
+$INDEX-TROGGLE: 3;
+$INDEX-MUNCHER-DIED: 4;
+$INDEX-MENU: 4;
+$INDEX-LOADING: 5;
+
+/*
+From: http://www.dafont.com/reditum.font
+*/
+@font-face {
+	font-family: 'pixel';
+	src: url('/font/Minecraftia.ttf'),  /* Safari, Chrome, FireFox */
+		 url('/font/Reditum.eot');  /* IE */
+}
+
 
 @mixin container {
 	$newHeight: $GRID-ROWS - 1;
@@ -59,6 +70,7 @@ body {
 	margin: 0 auto;
 	color: white;
 	background: black;
+	font-family: 'pixel';
 }
 
 /*****************************************************
@@ -68,7 +80,7 @@ body {
 	width: $CONTAINER-WIDTH;
 	height: $CONTAINER-HEIGHT;
 	position: absolute;
-	z-index: $MENU-INDEX;
+	z-index: $INDEX-MENU;
 
 	text-align: center;
 	background-color: black;
@@ -77,7 +89,7 @@ body {
 
 	h1 {
 		margin-top: 150px;
-		font-size: 5em;
+		font-size: 4em;
 	}
 
 	ul {
@@ -106,7 +118,7 @@ body {
 	width: $CONTAINER-WIDTH;
 	height: $CONTAINER-HEIGHT;
 	position: absolute;
-	z-index: $LOADING-INDEX;
+	z-index: $INDEX-LOADING;
 	overflow: hidden;
 
 	$loading-height: ((($GRID-ROWS * $TILE-HEIGHT) + (($GRID-ROWS - 3) * $BORDER-WIDTH))  / ($GRID-ROWS * 2)) + $BORDER-WIDTH;
@@ -169,7 +181,8 @@ body {
 		vertical-align: top;
 
 		span {
-			font-size: 20pt;
+			/*font-size: 20pt;*/
+			font-size: 1.4em;
 			display: block;
 		}
 	}
@@ -182,7 +195,8 @@ body {
 		border-bottom: $BORDER-WIDTH solid red;
 		text-align: center;
 
-		font-size: 15pt;
+		/*font-size: 15pt;*/
+		font-size: 1.25em;
 		line-height: 12pt;
 	}
 }
@@ -194,7 +208,7 @@ body {
 
 #grid {
 	@include container;
-	z-index: $BOARD-INDEX;
+	z-index: $INDEX-BOARD;
 
 	.row {
 		display:block;
@@ -215,7 +229,8 @@ body {
 				width: 80%;
 				margin: 25% auto;
 				text-align: center;
-				font-size: 15pt;
+				/*font-size: 15pt;*/
+				font-size: 1.25em;
 				color: white;
 				background-color: black;
 			}
@@ -245,6 +260,24 @@ background-color: white;
 border-radius: 25px;
 } */
 
+.muncher-died {
+	background-color: red;
+	position: absolute;
+	width: $CONTAINER-WIDTH - $TILE-WIDTH + ($BORDER-WIDTH * 2);
+	height: $TILE-HEIGHT + $BORDER-WIDTH;
+	margin-top: ($TILE-HEIGHT * 2) + ($TILE-HEIGHT / 2) - ($BORDER-WIDTH * 4);
+	margin-left: ($TILE-WIDTH / 2) - ($BORDER-WIDTH * 2);
+	z-index: $INDEX-MUNCHER-DIED;
+	/*z-index: $INDEX-MUNCHER;*/
+	text-align: center;
+
+	span {
+		/*padding-top: 25px;*/
+		/*font-size: 18pt;*/
+		font-size: 1.5em;
+	}
+}
+
 .muncher {
 	background: transparent url("/img/muncher.png") 0 0 no-repeat;	
 	background-size: 100% 100%;
@@ -260,7 +293,8 @@ border-radius: 25px;
 	margin-top: $height;
 	margin-left: ($TILE-WIDTH / 2) - ($BORDER-WIDTH * 2);
 
-	font-size: 30pt;
+	/*font-size: 30pt;*/
+	font-size: 2.5em;
 
 	div:first-child {
 		display: inline-block;
@@ -272,6 +306,7 @@ border-radius: 25px;
 		width: ($TILE-WIDTH - ($BORDER-WIDTH * 2)) * 2;
 		border: $BORDER-WIDTH solid blue;
 		text-align: center;
+		margin-left: 25px;
 	}
 
 	.lives {
@@ -296,7 +331,7 @@ border-radius: 25px;
 *****************************************************/
 #player-grid {
 	@include container;
-	z-index: $MUNCHER-INDEX;
+	z-index: $INDEX-MUNCHER;
 
 	#muncher {
 		position: absolute;
@@ -312,7 +347,7 @@ border-radius: 25px;
 *****************************************************/
 .enemy-grid {
 	@include container;
-	z-index: $TROGGLE-INDEX;
+	z-index: $INDEX-TROGGLE;
 
 	.troggle {
 		position: absolute;

@@ -36,12 +36,13 @@ function GameManager() {
 
 // Start a new game with resetted settings
 GameManager.prototype.restart = function() {
-	this.html.displayElement('.main-screen', true);			// show menu navigation
-	this.navigation = _NAVIGATION.MENU;						// set navigation type to menu
-	this.currentMenuSelect = 0;								// current menu selection is 0 (Multiples)
-	this.html.changeMenuSelection(this.currentMenuSelect);	// highlight current selection
-	this.muncher.resetLives();								// reset munchers lives
-	this.html.displayLives(this.muncher.getLivesLeft() - 1);
+	this.html.displayElement('.main-screen', true);				// show menu navigation
+	this.navigation = _NAVIGATION.MENU;							// set navigation type to menu
+	this.currentMenuSelect = 0;									// current menu selection is 0 (Multiples)
+	this.html.changeMenuSelection(this.currentMenuSelect);		// highlight current selection
+	this.muncher.resetLives();									// reset munchers lives
+	this.html.displayLives(this.muncher.getLivesLeft() - 1);	// display lives
+	this.html.displayElement('.muncher-died', false);			// hide message
 };
 
 // reset the game board
@@ -84,6 +85,25 @@ GameManager.prototype.keyboardAction = function(input) {
 	} else if(this.navigation == _NAVIGATION.GAME) {
 	// input now controls the game/muncher
 		this.move(this.muncher, input.action);
+	} else if(this.navigation == _NAVIGATION.MESSAGE) {
+	// input now controls the in game message (Died or game over)
+		if(input.action == _DIRECTION.SELECT) {
+			this.html.displayElement('.muncher-died', false);	// hide message
+
+			if(this.muncher.getLivesLeft() < 1) {
+				this.displayLoadingScreen(true);
+				this.navigation = _NAVIGATION.MENU;
+
+				var self = this;
+				// after load screen is done, reset load screen to original position so it can be used again
+				var timeout = window.setTimeout(function() {
+					self.restart();						// show menu
+					window.clearTimeout(timeout);		// clear timeout	
+				}, 1000);
+			} else {
+				this.navigation = _NAVIGATION.GAME;
+			}
+		}
 	}
 };
 
@@ -112,7 +132,7 @@ GameManager.prototype.moveAI = function(character) {
 	// console.log('Move AI called...');
 
 	var timeout = window.setTimeout(function() {
-		// console.log('Moving AI');
+		console.log('Moving AI');
 		var randomDirection = character.getDirection();			// if it's the first move, move onto the board from the outside
 
 		// inital movement to go onto the board
@@ -146,6 +166,12 @@ GameManager.prototype.moveAI = function(character) {
 					self.startAI();								// call start AI to move the AI again
 				}, 500);
 			}
+		} else if(self.navigation == _NAVIGATION.MESSAGE) {
+			// keep calling to move the character until the message is gone
+			var timeout2 = window.setTimeout(function() {
+				window.clearTimeout(timeout2);				// clear timeout
+				self.moveAI(character);								// call start AI to move the AI again
+			}, 500);
 		} else {
 		// we're no longer playing, stop moving AI
 			self.removeCharacter(character);
@@ -159,9 +185,9 @@ GameManager.prototype.moveAI = function(character) {
 // if direction is a space: clear tile, and validate tile
 // else: remove old position css, move character in the direction, and then add new position css
 GameManager.prototype.move = function(character, direction) {
-	var position = character.getPosition();
+	if(!this.isLoading && this.navigation == _NAVIGATION.GAME) {
+		var position = character.getPosition();
 
-	if(!this.isLoading) {
 		if(direction == _DIRECTION.SELECT) {
 			this.html.clearTile(position);			// clear tile value
 			this.validateTile(position);			// validate tile value
@@ -236,21 +262,16 @@ GameManager.prototype.displayCharacter = function(character) {
 GameManager.prototype.muncherDied = function(string) {
 	this.muncher.died();						// reduce life by 1
 	if(this.muncher.getLivesLeft() < 1)	{		// if no more lives, end game
-		alert('Game Over');
-		this.displayLoadingScreen(true);
-
-		var self = this;
-		// after load screen is done, reset load screen to original position so it can be used again
-		var timeout = window.setTimeout(function() {
-			self.restart();						// show menu
-			window.clearTimeout(timeout);		// clear timeout	
-		}, 1000);
+		this.html.displayMuncherDied('Game Over');
 	} else {
 		var lives = this.muncher.getLivesLeft();
 		var str = '\n' + lives + ' Lives Left!';
-		alert(string + str);
+		this.html.displayMuncherDied(string + str);
 		this.html.displayLives(lives - 1);
 	}
+
+	this.html.displayElement('.muncher-died', true); 	// show message
+	this.navigation = _NAVIGATION.MESSAGE;
 };
 
 
